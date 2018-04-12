@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CookBookDbContext.cs" />
     <Compile Include="Entities\Base\EntityBase.cs" />
     <Compile Include="Entities\FoodType.cs" />
     <Compile Include="Entities\IngredientAmountEntity.cs" />
