@@ -3,27 +3,26 @@ using Xunit;
 
 namespace CookBook.DAL.Tests
 {
-    public class CookBookDbContextTests
+    public class CookBookDbContextTests : IClassFixture<CookBookDbContextTestsClassSetupFixture>
     {
-        public CookBookDbContextTests()
-        {
-            this._cookBookDbContext = new CookBookDbContext();
+        private readonly CookBookDbContextTestsClassSetupFixture _cookBookDbContextTestsClassSetupFixture;
 
-            if (this._cookBookDbContext.Database.Exists())
-                this._cookBookDbContext.Database.Delete();
+        public CookBookDbContextTests(CookBookDbContextTestsClassSetupFixture cookBookDbContextTestsClassSetupFixture)
+        {
+            this._cookBookDbContextTestsClassSetupFixture = cookBookDbContextTestsClassSetupFixture;
         }
 
-        private readonly CookBookDbContext _cookBookDbContext;
+        private CookBookDbContext CookBookDbContext => this._cookBookDbContextTestsClassSetupFixture.CookBookDbContext;
 
         [Fact]
         //Intent_Method_ExpectedState
         public void CreateDatabase_DatabaseCreate_DatabaseCreated()
         {
             //Act
-            this._cookBookDbContext.Database.CreateIfNotExists();
+            this.CookBookDbContext.Database.CreateIfNotExists();
 
             //Assert
-            Assert.True(this._cookBookDbContext.Database.Exists());
+            Assert.True(this.CookBookDbContext.Database.Exists());
         }
 
         [Fact]
@@ -33,8 +32,8 @@ namespace CookBook.DAL.Tests
             var ingredient = new IngredientEntity() {Name = "Sugar", Description = "Sweet"};
 
             //Act
-            this._cookBookDbContext.Ingredients.Add(ingredient);
-            var savedEntities = this._cookBookDbContext.SaveChanges();
+            this.CookBookDbContext.Ingredients.Add(ingredient);
+            var savedEntities = this.CookBookDbContext.SaveChanges();
 
             //Assert
             Assert.Equal(1, savedEntities);
