@@ -15,7 +15,10 @@ namespace CookBook.DAL.Tests
         {
             this.CookBookDbContext = new CookBookDbContext();
 
-            if (this.CookBookDbContext.Database.Exists()) this.CookBookDbContext.Database.Delete();
+            if (this.CookBookDbContext.Database.Exists())
+            {
+                this.CookBookDbContext.Database.Delete();
+            }
         }
 
         public void Dispose()
