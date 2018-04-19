@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using CookBook.DAL;
@@ -35,17 +36,20 @@ namespace CookBook.BL.Repository
 
         public void Delete(IngredientEntity ingredientEntity)
         {
-            this.Delete(ingredientEntity.Id);
+            this._cookBookDbContext.Ingredients.Remove(ingredientEntity);
         }
 
         public void Delete(Guid id)
         {
-            var ingredientEntity = new IngredientEntity(){Id = id};
-            this._cookBookDbContext.Ingredients.Attach(ingredientEntity);
+            var entity = this._cookBookDbContext.Ingredients.Local.SingleOrDefault(e => e.Id.Equals(id));
 
-            this._cookBookDbContext.Entry(ingredientEntity).State = EntityState.Deleted;
+            if (entity == null)
+            {
+                entity = new IngredientEntity { Id = id };
+                this._cookBookDbContext.Ingredients.Attach(entity);
+            }
 
-            this._cookBookDbContext.SaveChanges();
+            this.Delete(entity);
         }
 
         public void Update(IngredientEntity ingredientEntity)
