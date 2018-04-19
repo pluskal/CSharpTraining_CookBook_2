@@ -168,7 +168,6 @@ namespace CookBook.DAL.Tests
             Assert.Equal(1, savedEntities);
 
             Assert.Equal(ingredient.Id, ingredientFromDb.Id);
-            Assert.Equal(ingredient, ingredientFromDb);
         }
     }
 }
