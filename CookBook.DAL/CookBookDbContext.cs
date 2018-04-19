@@ -10,8 +10,8 @@ namespace CookBook.DAL
 {
     public class CookBookDbContext : DbContext
     {
-        public IDbSet<RecipeEntity> Recipes { get; set; }
-        public IDbSet<IngredientEntity> Ingredients { get; set; }
+        public virtual IDbSet<RecipeEntity> Recipes { get; set; }
+        public virtual IDbSet<IngredientEntity> Ingredients { get; set; }
 
         public CookBookDbContext()
         {
