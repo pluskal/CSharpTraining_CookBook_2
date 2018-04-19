@@ -15,8 +15,7 @@ namespace CookBook.DAL
 
         public CookBookDbContext()
         {
-            Database.SetInitializer<CookBookDbContext>(new DropCreateDatabaseAlways<CookBookDbContext>());
-            ////Database.SetInitializer<CookBookDbContext>(new CookBookDbInitializer());
+            Database.SetInitializer<CookBookDbContext>(new CookBookDbInitializer());
         }
     }
 
