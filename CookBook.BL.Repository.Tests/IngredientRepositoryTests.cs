@@ -172,21 +172,6 @@ namespace CookBook.BL.Repository.Tests
             Assert.Equal(expectedIngredient, ingredient);
         }
 
-        [Fact(Skip = "Entry is not virtual")]
-        public void OneItem_Update_ItemUpdated()
-        {
-            //Arrange
-            var updatedIngredient = IngredientSeed[0];
-            updatedIngredient.Name = "Updated name";
-            updatedIngredient.Description = "Updated description";
-
-            //Act
-            this._repositorySUT.Update(updatedIngredient);
-
-            //Assert
-            this._dbContextMock.Verify(context => context.Entry(updatedIngredient), Times.Once);
-        }
-
         [Fact]
         public void OneItemNonExisting_DeleteById_ShouldCallRemove()
         {
