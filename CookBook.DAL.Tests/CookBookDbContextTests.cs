@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CookBook.DAL.Entities;
+using CookBook.Shared.Enums;
 using Xunit;
 
 namespace CookBook.DAL.Tests

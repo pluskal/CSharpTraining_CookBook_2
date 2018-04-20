@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookBook.BL.Repository", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookBook.BL.Repository.Tests", "CookBook.BL.Repository.Tests\CookBook.BL.Repository.Tests.csproj", "{45A06BE6-60EF-4291-B746-9B2F45249582}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookBook.BL.Facades", "CookBook.BL.Facades\CookBook.BL.Facades.csproj", "{DDEC83AB-43E4-4D6B-B2A6-FBB3D8A95E2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookBook.Shared", "CookBook.Shared\CookBook.Shared.csproj", "{6917681D-C10A-4DB2-B454-DA91FFFBDB29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{45A06BE6-60EF-4291-B746-9B2F45249582}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45A06BE6-60EF-4291-B746-9B2F45249582}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45A06BE6-60EF-4291-B746-9B2F45249582}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDEC83AB-43E4-4D6B-B2A6-FBB3D8A95E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDEC83AB-43E4-4D6B-B2A6-FBB3D8A95E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDEC83AB-43E4-4D6B-B2A6-FBB3D8A95E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDEC83AB-43E4-4D6B-B2A6-FBB3D8A95E2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6917681D-C10A-4DB2-B454-DA91FFFBDB29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6917681D-C10A-4DB2-B454-DA91FFFBDB29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6917681D-C10A-4DB2-B454-DA91FFFBDB29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6917681D-C10A-4DB2-B454-DA91FFFBDB29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
