@@ -16,7 +16,8 @@ namespace CookBook.BL.Repository.Tests
 
             this._dbContextMock.Setup(c => c.Set<IngredientEntity>()).Returns(this._ingredientDbSetMock.Object);
 
-            this._repositorySUT = new IngredientRepository(this._dbContextMock.Object);
+            var unitOfWork = new UnitOfWork(this._dbContextMock.Object);
+            this._repositorySUT = new IngredientRepository(unitOfWork);
         }
 
         private readonly IngredientRepository _repositorySUT;
@@ -30,7 +31,7 @@ namespace CookBook.BL.Repository.Tests
             new IngredientEntity {Name = "Water", Description = $""},
             new IngredientEntity {Name = "Ice", Description = $""},
             new IngredientEntity {Name = "Milk", Description = $""}
-        };
+        };  
 
         private Mock<TestDbSet<TEntity>> CreateDbSet<TEntity>(IList<TEntity> entityList)
             where TEntity : EntityBase, new()

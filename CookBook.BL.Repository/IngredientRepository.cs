@@ -9,7 +9,7 @@ namespace CookBook.BL.Repository
 {
     public class IngredientRepository : RepositoryBase<IngredientEntity>
     {
-        public IngredientRepository(CookBookDbContext cookBookDbContext) : base(cookBookDbContext)
+        public IngredientRepository(UnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
     }
