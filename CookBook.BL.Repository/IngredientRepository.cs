@@ -37,6 +37,7 @@ namespace CookBook.BL.Repository
         public void Delete(IngredientEntity ingredientEntity)
         {
             this._cookBookDbContext.Ingredients.Remove(ingredientEntity);
+            this._cookBookDbContext.SaveChanges();
         }
 
         public void Delete(Guid id)
