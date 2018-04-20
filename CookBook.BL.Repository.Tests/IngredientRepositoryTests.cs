@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.Migrations;
+﻿using System.Collections.Generic;
 using System.Linq;
 using CookBook.DAL;
 using CookBook.DAL.Entities;
@@ -15,6 +10,15 @@ namespace CookBook.BL.Repository.Tests
 {
     public class IngredientRepositoryTests
     {
+        public IngredientRepositoryTests()
+        {
+            this._ingredientDbSetMock = this.CreateDbSet(IngredientSeed);
+
+            this._dbContextMock.Setup(c => c.Set<IngredientEntity>()).Returns(this._ingredientDbSetMock.Object);
+
+            this._repositorySUT = new IngredientRepository(this._dbContextMock.Object);
+        }
+
         private readonly IngredientRepository _repositorySUT;
         private readonly Mock<CookBookDbContext> _dbContextMock = new Mock<CookBookDbContext>();
         private readonly Mock<TestDbSet<IngredientEntity>> _ingredientDbSetMock;
@@ -25,16 +29,20 @@ namespace CookBook.BL.Repository.Tests
             new IngredientEntity {Name = "Wheat", Description = $""},
             new IngredientEntity {Name = "Water", Description = $""},
             new IngredientEntity {Name = "Ice", Description = $""},
-            new IngredientEntity {Name = "Milk", Description = $""},
+            new IngredientEntity {Name = "Milk", Description = $""}
         };
 
-        public IngredientRepositoryTests()
+        private Mock<TestDbSet<TEntity>> CreateDbSet<TEntity>(IList<TEntity> entityList)
+            where TEntity : EntityBase, new()
         {
-            this._ingredientDbSetMock = this.CreateDbSet(IngredientSeed);
-            
-            this._dbContextMock.Setup(c => c.Ingredients).Returns(this._ingredientDbSetMock.Object);
+            var dbSetMock = new Mock<TestDbSet<TEntity>>(entityList) {CallBase = true};
+            var data = dbSetMock.Object.Local.AsQueryable();
+            dbSetMock.As<IQueryable<TEntity>>().Setup(m => m.Provider).Returns(data.Provider);
+            dbSetMock.As<IQueryable<TEntity>>().Setup(m => m.Expression).Returns(data.Expression);
+            dbSetMock.As<IQueryable<TEntity>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            dbSetMock.As<IQueryable<TEntity>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator);
 
-            this._repositorySUT = new IngredientRepository(this._dbContextMock.Object);
+            return dbSetMock;
         }
 
         [Fact]
@@ -42,72 +50,12 @@ namespace CookBook.BL.Repository.Tests
         {
             //Arrange
             this._ingredientDbSetMock.Object.Local.Clear();
+
             //Act
             var allIngredients = this._repositorySUT.GetAll();
 
             //Assert
             Assert.Empty(allIngredients);
-        }
-
-        [Fact]
-        public void OneIngredient_GetAll_IsNotEmpty()
-        {
-            //Arrange
-            //Act
-            var allIngredients = this._repositorySUT.GetAll();
-
-            //Assert
-            Assert.NotEmpty(allIngredients);
-        }
-
-        [Fact]
-        public void NewEntity_Insert_EntityInserted()
-        {
-            //Arrange
-            var ingredientEntity = new IngredientEntity();
-            //Act
-            this._repositorySUT.Insert(ingredientEntity);
-
-            //Assert
-            this._ingredientDbSetMock.Verify(set => set.Add(ingredientEntity), Times.Once);
-        }
-
-        [Fact]
-        public void NewEntities_Insert_EntitiesInserted()
-        {
-            //Arrange
-            var ingredientEntity1 = new IngredientEntity(){Name = "Entity1Name",Description = "Entity1Description" };
-            var ingredientEntity2 = new IngredientEntity(){Name = "Entity2Name",Description = "Entity2Description" };
-            var ingredientEntity3 = new IngredientEntity(){Name = "Entity3Name",Description = "Entity3Description" };
-
-            //Act
-            this._repositorySUT.Insert(ingredientEntity1);
-            this._repositorySUT.Insert(ingredientEntity2);
-            this._repositorySUT.Insert(ingredientEntity3);
-
-            //Assert
-            this._ingredientDbSetMock.Verify(set => set.Add(ingredientEntity1), Times.Once);
-            this._ingredientDbSetMock.Verify(set => set.Add(ingredientEntity2), Times.Once);
-            this._ingredientDbSetMock.Verify(set => set.Add(ingredientEntity3), Times.Once);
-
-            Assert.Contains(ingredientEntity1, this._ingredientDbSetMock.Object.Local);
-            Assert.Contains(ingredientEntity2, this._ingredientDbSetMock.Object.Local);
-            Assert.Contains(ingredientEntity3, this._ingredientDbSetMock.Object.Local);
-        }
-
-        [Fact]
-        public void OneIngredient_Delete_SetEntityStateToModified()
-        {
-            //Arrange
-            var deletedIngredient = IngredientSeed[1];
-
-            //Act
-            this._repositorySUT.Delete(deletedIngredient);
-
-            //Assert
-            Assert.DoesNotContain(deletedIngredient, this._ingredientDbSetMock.Object.Local);
-            this._ingredientDbSetMock.Verify(set => set.Remove(deletedIngredient), Times.Once);
-
         }
 
         [Fact]
@@ -125,14 +73,74 @@ namespace CookBook.BL.Repository.Tests
 
             //Assert
             Assert.DoesNotContain(deletedIngredient1, this._ingredientDbSetMock.Object.Local);
-            this._ingredientDbSetMock.Verify(set=>set.Remove(deletedIngredient1),Times.Once);
+            this._ingredientDbSetMock.Verify(set => set.Remove(deletedIngredient1), Times.Once);
 
             Assert.DoesNotContain(deletedIngredient2, this._ingredientDbSetMock.Object.Local);
             this._ingredientDbSetMock.Verify(set => set.Remove(deletedIngredient2), Times.Once);
 
             Assert.DoesNotContain(deletedIngredient3, this._ingredientDbSetMock.Object.Local);
             this._ingredientDbSetMock.Verify(set => set.Remove(deletedIngredient2), Times.Once);
+        }
 
+        [Fact]
+        public void NewEntities_Insert_EntitiesInserted()
+        {
+            //Arrange
+            var ingredientEntity1 = new IngredientEntity {Name = "Entity1Name", Description = "Entity1Description"};
+            var ingredientEntity2 = new IngredientEntity {Name = "Entity2Name", Description = "Entity2Description"};
+            var ingredientEntity3 = new IngredientEntity {Name = "Entity3Name", Description = "Entity3Description"};
+
+            //Act
+            this._repositorySUT.Insert(ingredientEntity1);
+            this._repositorySUT.Insert(ingredientEntity2);
+            this._repositorySUT.Insert(ingredientEntity3);
+
+            //Assert
+            this._ingredientDbSetMock.Verify(set => set.Add(ingredientEntity1), Times.Once);
+            this._ingredientDbSetMock.Verify(set => set.Add(ingredientEntity2), Times.Once);
+            this._ingredientDbSetMock.Verify(set => set.Add(ingredientEntity3), Times.Once);
+
+            Assert.Contains(ingredientEntity1, this._ingredientDbSetMock.Object.Local);
+            Assert.Contains(ingredientEntity2, this._ingredientDbSetMock.Object.Local);
+            Assert.Contains(ingredientEntity3, this._ingredientDbSetMock.Object.Local);
+        }
+
+        [Fact]
+        public void NewEntity_Insert_EntityInserted()
+        {
+            //Arrange
+            var ingredientEntity = new IngredientEntity();
+
+            //Act
+            this._repositorySUT.Insert(ingredientEntity);
+
+            //Assert
+            this._ingredientDbSetMock.Verify(set => set.Add(ingredientEntity), Times.Once);
+        }
+
+        [Fact]
+        public void OneIngredient_Delete_SetEntityStateToModified()
+        {
+            //Arrange
+            var deletedIngredient = IngredientSeed[1];
+
+            //Act
+            this._repositorySUT.Delete(deletedIngredient);
+
+            //Assert
+            Assert.DoesNotContain(deletedIngredient, this._ingredientDbSetMock.Object.Local);
+            this._ingredientDbSetMock.Verify(set => set.Remove(deletedIngredient), Times.Once);
+        }
+
+        [Fact]
+        public void OneIngredient_GetAll_IsNotEmpty()
+        {
+            //Arrange
+            //Act
+            var allIngredients = this._repositorySUT.GetAll();
+
+            //Assert
+            Assert.NotEmpty(allIngredients);
         }
 
         [Fact]
@@ -145,22 +153,9 @@ namespace CookBook.BL.Repository.Tests
             this._repositorySUT.Delete(deletedIngredient.Id);
 
             //Assert
-            this._ingredientDbSetMock.Verify(set => set.Remove(It.Is<IngredientEntity>(entity => entity.Id == deletedIngredient.Id)), Times.Once);
+            this._ingredientDbSetMock.Verify(
+                set => set.Remove(It.Is<IngredientEntity>(entity => entity.Id == deletedIngredient.Id)), Times.Once);
             Assert.DoesNotContain(deletedIngredient, this._ingredientDbSetMock.Object.Local);
-
-        }
-
-        [Fact]
-        public void OneItemNonExisting_DeleteById_ShouldCallRemove()
-        {
-            //Arrange
-            var deletedIngredient = new IngredientEntity();
-
-            //Act
-            this._repositorySUT.Delete(deletedIngredient.Id);
-
-            //Assert
-            this._ingredientDbSetMock.Verify(set => set.Remove(It.Is<IngredientEntity>(entity => entity.Id == deletedIngredient.Id)), Times.Once);
         }
 
         [Fact]
@@ -189,19 +184,20 @@ namespace CookBook.BL.Repository.Tests
 
             //Assert
             this._dbContextMock.Verify(context => context.Entry(updatedIngredient), Times.Once);
-
         }
 
-        private Mock<TestDbSet<TEntity>> CreateDbSet<TEntity>(IList<TEntity> entityList) where TEntity : EntityBase, new()
+        [Fact]
+        public void OneItemNonExisting_DeleteById_ShouldCallRemove()
         {
-            var dbSetMock = new Mock<TestDbSet<TEntity>>(entityList) { CallBase = true };
-            var data = dbSetMock.Object.Local.AsQueryable();
-            dbSetMock.As<IQueryable<TEntity>>().Setup(m => m.Provider).Returns(data.Provider);
-            dbSetMock.As<IQueryable<TEntity>>().Setup(m => m.Expression).Returns(data.Expression);
-            dbSetMock.As<IQueryable<TEntity>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            dbSetMock.As<IQueryable<TEntity>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator);
+            //Arrange
+            var deletedIngredient = new IngredientEntity();
 
-            return dbSetMock;
+            //Act
+            this._repositorySUT.Delete(deletedIngredient.Id);
+
+            //Assert
+            this._ingredientDbSetMock.Verify(
+                set => set.Remove(It.Is<IngredientEntity>(entity => entity.Id == deletedIngredient.Id)), Times.Once);
         }
     }
 }
