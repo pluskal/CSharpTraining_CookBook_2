@@ -99,6 +99,10 @@
       <Project>{EB39FF08-E832-4013-8E42-5CC0E70D6562}</Project>
       <Name>CookBook.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CookBook.Shared\CookBook.Shared.csproj">
+      <Project>{6917681d-c10a-4db2-b454-da91fffbdb29}</Project>
+      <Name>CookBook.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.7.0\analyzers\dotnet\cs\xunit.analyzers.dll" />

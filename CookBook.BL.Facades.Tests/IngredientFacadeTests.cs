@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoMapper;
 using CookBook.BL.Facades.DTOs;
 using CookBook.BL.Repository;
 using CookBook.DAL;
@@ -9,18 +10,19 @@ namespace CookBook.BL.Facades.Tests
     /// <summary>
     ///     Integration tests
     /// </summary>
-    public class IngredientFacadeTests
+    public class IngredientFacadeTests:IDisposable
     {
         public IngredientFacadeTests()
         {
             var cookBookDbContext = new CookBookDbContext();
-            var unitOfWork = new UnitOfWork(cookBookDbContext);
-            var ingredientRepository = new IngredientRepository(unitOfWork);
-            var mapper = new Mapper();
+            _unitOfWork = new UnitOfWork(cookBookDbContext);
+            var ingredientRepository = new IngredientRepository(_unitOfWork);
+            var mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CookBookMappingProfile>()));
             _facadeSUT = new IngredientFacade(ingredientRepository, mapper);
         }
 
         private readonly IngredientFacade _facadeSUT;
+        private readonly UnitOfWork _unitOfWork;
 
         [Fact]
         public void _GetList_AnyIngredient()
@@ -85,5 +87,12 @@ namespace CookBook.BL.Facades.Tests
             //Assert
             Assert.Equal(random.ToString(),ingredient.Description);
         }
+
+        public void Dispose()
+        {
+            _unitOfWork?.Dispose();
+        }
     }
+
+   
 }
