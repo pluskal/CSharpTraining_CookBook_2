@@ -44,6 +44,8 @@ namespace CookBook.BL.Facades
             else
                 _repository.Update(entity);
 
+            this._repository.UnitOfWork.Commit();
+
             return _mapper.Map<TDetailDTO>(entity);
         }
 
