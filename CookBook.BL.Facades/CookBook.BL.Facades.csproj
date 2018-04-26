@@ -40,15 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IngredientDetailDTO.cs" />
+    <Compile Include="DTOs\IngredientDetailDTO.cs" />
     <Compile Include="IngredientFacade.cs" />
-    <Compile Include="IngredientListDTO.cs" />
+    <Compile Include="DTOs\IngredientListDTO.cs" />
+    <Compile Include="Mapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CookBook.BL.Repository\CookBook.BL.Repository.csproj">
       <Project>{1026C3C0-8C02-427C-8454-F69D846A790D}</Project>
       <Name>CookBook.BL.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CookBook.DAL\CookBook.DAL.csproj">
+      <Project>{EB39FF08-E832-4013-8E42-5CC0E70D6562}</Project>
+      <Name>CookBook.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\CookBook.Shared\CookBook.Shared.csproj">
       <Project>{6917681D-C10A-4DB2-B454-DA91FFFBDB29}</Project>

@@ -27,6 +27,7 @@ namespace CookBook.BL.Repository.Base
 
         public void Insert(TEntity ingredientEntity)
         {
+            ingredientEntity.Id = Guid.NewGuid();
             this._unitOfWork.Context.Set<TEntity>().Add(ingredientEntity);
         }
 
@@ -51,6 +52,11 @@ namespace CookBook.BL.Repository.Base
         public void Update(TEntity ingredientEntity)
         {
             this._unitOfWork.Context.Entry(ingredientEntity).State = EntityState.Modified;
+        }
+
+        public TEntity InitializeNew()
+        {
+            return new TEntity {Id = Guid.Empty};
         }
 
         public void Dispose()
