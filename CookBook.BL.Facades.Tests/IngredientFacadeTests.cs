@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using CookBook.BL.Facades.DTOs;
+using CookBook.BL.Facades.Mappings;
 using CookBook.BL.Repository;
 using CookBook.DAL;
 using Xunit;
@@ -20,7 +21,7 @@ namespace CookBook.BL.Facades.Tests
             var cookBookDbContext = new CookBookDbContext();
             _unitOfWork = new UnitOfWork(cookBookDbContext);
             var ingredientRepository = new IngredientRepository(_unitOfWork);
-            var mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CookBookMappingProfile>()));
+            var mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<IngredientMappingProfile>()));
             _facadeSUT = new IngredientFacade(ingredientRepository, mapper);
         }
 

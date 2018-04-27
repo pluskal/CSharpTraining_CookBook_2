@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\FoodType.cs" />
     <Compile Include="Enums\Unit.cs" />
     <Compile Include="Interfaces\IId.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

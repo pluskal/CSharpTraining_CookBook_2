@@ -7,8 +7,7 @@ namespace CookBook.BL.Facades
 {
     public class IngredientFacade : CrudFacade<IngredientEntity, IngredientListDTO, IngredientDetailDTO>
     {
-        public IngredientFacade(IngredientRepository repository, IMapper mapper) : base(repository,
-            mapper)
+        public IngredientFacade(IngredientRepository repository, IMapper mapper) : base(repository, mapper)
         {
         }
     }

@@ -51,7 +51,6 @@
     <Compile Include="CookBookDbContext.cs" />
     <Compile Include="CookBookDbInitializer.cs" />
     <Compile Include="Entities\Base\EntityBase.cs" />
-    <Compile Include="Entities\FoodType.cs" />
     <Compile Include="Entities\IngredientAmountEntity.cs" />
     <Compile Include="Entities\IngredientEntity.cs" />
     <Compile Include="Entities\RecipeEntity.cs" />
@@ -59,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

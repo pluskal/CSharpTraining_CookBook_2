@@ -1,16 +1,17 @@
 ﻿using System;
 using AutoMapper;
 using CookBook.BL.Facades.DTOs;
+using CookBook.BL.Facades.Mappings;
 using CookBook.DAL.Entities;
 using Xunit;
 
 namespace CookBook.BL.Facades.Tests
 {
-    public class MappingTests
+    public class IngredientMappingTests
     {
-        public MappingTests()
+        public IngredientMappingTests()
         {
-            _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<CookBookMappingProfile>()));
+            _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<IngredientMappingProfile>()));
 
             IngredientEntity = new IngredientEntity
             {
