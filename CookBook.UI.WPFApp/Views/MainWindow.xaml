@@ -1,0 +1,23 @@
+﻿<Window x:Class="CookBook.UI.WPFApp.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CookBook.UI.WPFApp"
+        xmlns:views="clr-namespace:CookBook.UI.WPFApp.Views"
+        mc:Ignorable="d"
+        Title="CookBook"
+        Height="450"
+        Width="800"
+        d:DataContext="{d:DesignInstance local:MainViewModel, IsDesignTimeCreatable=False}"
+        DataContext="{Binding MainViewModel, Source={StaticResource ViewModelLocator}}"
+        >
+    <Grid>
+        <TabControl>
+            <TabItem Header="Recipes">
+                <views:RecipeListView />
+            </TabItem>
+            <TabItem Header="Ingredients"/>
+        </TabControl>
+    </Grid>
+</Window>
