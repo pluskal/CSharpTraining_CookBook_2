@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CookBook.DAL.Entities;
+using CookBook.Shared.Enums;
 using Xunit;
 
 namespace CookBook.DAL.Tests
@@ -129,7 +130,7 @@ namespace CookBook.DAL.Tests
             var lemonadeRecipeFromDb = this.CookBookDbContext.Recipes.First(r => r.Id == lemonadeRecipe.Id);
 
             //Assert
-            Assert.Equal(9, savedEntities);
+            Assert.Equal(5, savedEntities);
             Assert.NotNull(lemonadeRecipeFromDb);
             Assert.Equal(lemonadeRecipe, lemonadeRecipeFromDb);
         }

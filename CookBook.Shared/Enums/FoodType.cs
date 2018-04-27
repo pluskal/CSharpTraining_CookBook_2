@@ -1,4 +1,4 @@
-﻿namespace CookBook.DAL.Entities
+﻿namespace CookBook.Shared.Enums
 {
     public enum FoodType
     {
