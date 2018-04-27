@@ -10,8 +10,11 @@ namespace CookBook.BL.Facades.Tests
     /// <summary>
     ///     Integration tests
     /// </summary>
-    public class IngredientFacadeTests:IDisposable
+    public class IngredientFacadeTests : IDisposable
     {
+        private readonly IngredientFacade _facadeSUT;
+        private readonly UnitOfWork _unitOfWork;
+
         public IngredientFacadeTests()
         {
             var cookBookDbContext = new CookBookDbContext();
@@ -21,8 +24,10 @@ namespace CookBook.BL.Facades.Tests
             _facadeSUT = new IngredientFacade(ingredientRepository, mapper);
         }
 
-        private readonly IngredientFacade _facadeSUT;
-        private readonly UnitOfWork _unitOfWork;
+        public void Dispose()
+        {
+            _unitOfWork?.Dispose();
+        }
 
         [Fact]
         public void _GetList_AnyIngredient()
@@ -85,14 +90,7 @@ namespace CookBook.BL.Facades.Tests
             ingredient = _facadeSUT.Save(ingredient);
 
             //Assert
-            Assert.Equal(random.ToString(),ingredient.Description);
-        }
-
-        public void Dispose()
-        {
-            _unitOfWork?.Dispose();
+            Assert.Equal(random.ToString(), ingredient.Description);
         }
     }
-
-   
 }

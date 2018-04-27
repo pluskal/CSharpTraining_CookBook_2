@@ -8,13 +8,13 @@ using CookBook.Shared.Interfaces;
 
 namespace CookBook.BL.Facades
 {
-    public class CrudFacade<TEntity, TListDTO, TDetailDTO> 
+    public class CrudFacade<TEntity, TListDTO, TDetailDTO>
         where TEntity : EntityBase, new()
         where TListDTO : IId
         where TDetailDTO : class, IId
     {
-        private readonly RepositoryBase<TEntity> _repository;
         private readonly IMapper _mapper;
+        private readonly RepositoryBase<TEntity> _repository;
 
         public CrudFacade(RepositoryBase<TEntity> repository, IMapper mapper)
         {
@@ -44,7 +44,7 @@ namespace CookBook.BL.Facades
             else
                 _repository.Update(entity);
 
-            this._repository.UnitOfWork.Commit();
+            _repository.UnitOfWork.Commit();
 
             return _mapper.Map<TDetailDTO>(entity);
         }
