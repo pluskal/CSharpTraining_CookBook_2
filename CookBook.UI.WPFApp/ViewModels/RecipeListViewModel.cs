@@ -1,8 +1,10 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using Castle.Core.Internal;
 using CookBook.BL.Facades;
 using CookBook.BL.Facades.DTOs;
 using CookBook.UI.WPFApp.ViewModels.Messages;
+using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CookBook.UI.WPFApp.ViewModels
@@ -12,12 +14,21 @@ namespace CookBook.UI.WPFApp.ViewModels
         private readonly IMessenger _messenger;
         private readonly RecipeFacade _recipeFacade;
         private ObservableCollection<RecipeListDTO> _recipes;
-        private RecipeListDTO _selectedRecipe;
 
         public RecipeListViewModel(IMessenger messenger, RecipeFacade recipeFacade)
         {
             _messenger = messenger;
             _recipeFacade = recipeFacade;
+
+            SelectionChangedCommand = new RelayCommand<RecipeListDTO>(OnSelectionChanged);
+        }
+
+        public ICommand SelectionChangedCommand { get; }
+
+        private void OnSelectionChanged(RecipeListDTO selectedRecipe)
+        {
+            if (selectedRecipe == null) return;
+            _messenger.Send(new SelectedRecipeMessage {RecipeId = selectedRecipe.Id});
         }
 
         public ObservableCollection<RecipeListDTO> Recipes
@@ -29,24 +40,6 @@ namespace CookBook.UI.WPFApp.ViewModels
                 _recipes = value;
                 OnPropertyChanged();
             }
-        }
-
-        public RecipeListDTO SelectedRecipe
-        {
-            get => _selectedRecipe;
-            set
-            {
-                if (Equals(value, _selectedRecipe)) return;
-                _selectedRecipe = value;
-                OnPropertyChanged();
-                OnRecipeSelected();
-            }
-        }
-
-        private void OnRecipeSelected()
-        {
-            if(_selectedRecipe == null) return;
-            _messenger.Send(new SelectedRecipeMessage {RecipeId = _selectedRecipe.Id});
         }
 
         protected override void OnLoad()

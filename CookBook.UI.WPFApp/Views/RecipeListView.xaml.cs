@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace CookBook.UI.WPFApp.Views
 {
@@ -10,9 +12,5 @@ namespace CookBook.UI.WPFApp.Views
             InitializeComponent();
         }
 
-        private void Selector_OnSelected(object sender, RoutedEventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

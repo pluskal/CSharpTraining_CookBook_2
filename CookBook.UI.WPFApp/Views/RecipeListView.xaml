@@ -15,7 +15,13 @@
     </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
-        <ListView ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}" >
+        <ListView ItemsSource="{Binding Recipes}" x:Name="RecipesList">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}"
+                                           CommandParameter="{Binding SelectedItem, ElementName=RecipesList}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Recipe name" DisplayMemberBinding="{Binding Name}"     Width="120" />
