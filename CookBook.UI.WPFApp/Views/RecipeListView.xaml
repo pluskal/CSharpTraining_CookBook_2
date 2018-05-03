@@ -9,6 +9,11 @@
              d:DataContext="{d:DesignInstance viewModels:RecipeListViewModel, IsDesignTimeCreatable=False}"
              DataContext="{Binding RecipeListViewModel, Source={StaticResource ViewModelLocator}}"
              >
+    <i:Interaction.Triggers>
+    <i:EventTrigger EventName="Loaded">
+        <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+    </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <ListView ItemsSource="{Binding Recipes}" />
     </Grid>
