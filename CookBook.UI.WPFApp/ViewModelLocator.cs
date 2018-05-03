@@ -4,6 +4,7 @@ using CookBook.BL.Facades.Mappings;
 using CookBook.BL.Repository;
 using CookBook.DAL;
 using CookBook.UI.WPFApp.ViewModels;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CookBook.UI.WPFApp
 {
@@ -11,6 +12,7 @@ namespace CookBook.UI.WPFApp
     {
         private readonly IngredientFacade _ingredientFacade;
         private readonly RecipeFacade _recipeFacade;
+        private readonly Messenger _messenger;
 
         public ViewModelLocator()
         {
@@ -26,10 +28,11 @@ namespace CookBook.UI.WPFApp
             var mapper = new Mapper(configurationProvider);
             _ingredientFacade = new IngredientFacade(ingredientRepository, mapper);
             _recipeFacade = new RecipeFacade(recipeRepository, mapper);
+            _messenger = new Messenger();
         }
 
         public MainViewModel MainViewModel => new MainViewModel();
-        public RecipeListViewModel RecipeListViewModel => new RecipeListViewModel(_recipeFacade);
-        public RecipeDetailViewModel RecipeDetailViewModel=> new RecipeDetailViewModel(_recipeFacade);
+        public RecipeListViewModel RecipeListViewModel => new RecipeListViewModel(_messenger, _recipeFacade);
+        public RecipeDetailViewModel RecipeDetailViewModel=> new RecipeDetailViewModel(_messenger, _recipeFacade);
     }
 }

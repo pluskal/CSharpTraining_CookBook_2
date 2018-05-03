@@ -1,17 +1,44 @@
 using CookBook.BL.Facades;
 using CookBook.BL.Facades.DTOs;
+using CookBook.UI.WPFApp.ViewModels.Messages;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CookBook.UI.WPFApp.ViewModels
 {
     public class RecipeDetailViewModel : ViewModelBase
     {
         private readonly RecipeFacade _recipeFacade;
+        private readonly IMessenger _messenger;
+        private RecipeDetailDTO _recipeDetailDTO = new RecipeDetailDTO(){};
 
-        public RecipeDetailViewModel(RecipeFacade recipeFacade)
+        public RecipeDetailViewModel(IMessenger messenger, RecipeFacade recipeFacade)
         {
             _recipeFacade = recipeFacade;
+            _messenger = messenger;
+
+            _messenger.Register<SelectedRecipeMessage>(this, OnSelectedRecipe);
         }
 
-        public RecipeDetailDTO RecipeDetailDTO { get; set; } = new RecipeDetailDTO(){};
+        private void OnSelectedRecipe(SelectedRecipeMessage selectedRecipeMessage)
+        {
+            RecipeDetailDTO = this._recipeFacade.GetDetail(selectedRecipeMessage.RecipeId);
+        }
+
+        public RecipeDetailDTO RecipeDetailDTO
+        {
+            get => _recipeDetailDTO;
+            set
+            {
+                if (Equals(value, _recipeDetailDTO)) return;
+                _recipeDetailDTO = value;
+                OnPropertyChanged();
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            _messenger.Unregister<SelectedRecipeMessage>(this, OnSelectedRecipe);
+        }
     }
 }
