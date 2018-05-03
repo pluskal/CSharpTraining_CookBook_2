@@ -65,9 +65,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MainViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RecipeListViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="ViewModelLocator.cs" />
     <Compile Include="Views\RecipeListView.xaml.cs">
       <DependentUpon>RecipeListView.xaml</DependentUpon>
     </Compile>

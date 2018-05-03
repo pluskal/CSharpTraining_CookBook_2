@@ -1,3 +1,5 @@
+using System.Windows;
+
 namespace CookBook.UI.WPFApp.Views
 {
     public partial class RecipeListView

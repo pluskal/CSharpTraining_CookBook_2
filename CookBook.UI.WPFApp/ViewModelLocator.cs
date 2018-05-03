@@ -3,8 +3,9 @@ using CookBook.BL.Facades;
 using CookBook.BL.Facades.Mappings;
 using CookBook.BL.Repository;
 using CookBook.DAL;
+using CookBook.UI.WPFApp.ViewModels;
 
-namespace CookBook.UI.WPFApp.ViewModels
+namespace CookBook.UI.WPFApp
 {
     public class ViewModelLocator
     {

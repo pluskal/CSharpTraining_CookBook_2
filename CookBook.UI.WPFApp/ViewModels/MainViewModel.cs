@@ -1,4 +1,4 @@
-namespace CookBook.UI.WPFApp
+namespace CookBook.UI.WPFApp.ViewModels
 {
     public class MainViewModel
     {

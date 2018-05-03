@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using CookBook.BL.Facades;
 using CookBook.BL.Facades.DTOs;
 
@@ -11,12 +6,18 @@ namespace CookBook.UI.WPFApp.ViewModels
 {
     public class RecipeListViewModel
     {
+        private readonly RecipeFacade _recipeFacade;
+
         public RecipeListViewModel(RecipeFacade recipeFacade)
         {
-            var recipeListDtos = recipeFacade.GetList();
-            this.Recipes = new ObservableCollection<RecipeListDTO>(recipeListDtos);
+            _recipeFacade = recipeFacade;
         }
 
-        public ObservableCollection<RecipeListDTO> Recipes { get; }
+        public ObservableCollection<RecipeListDTO> Recipes { get; private set; }
+
+        private void OnLoad()
+        {
+            Recipes = new ObservableCollection<RecipeListDTO>(_recipeFacade.GetList());
+        }
     }
 }

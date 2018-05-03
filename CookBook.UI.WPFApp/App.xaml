@@ -4,8 +4,9 @@
              xmlns:local="clr-namespace:CookBook.UI.WPFApp"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:viewModels="clr-namespace:CookBook.UI.WPFApp.ViewModels"
+             xmlns:views="clr-namespace:CookBook.UI.WPFApp.Views"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-        <viewModels:ViewModelLocator x:Key="ViewModelLocator" />
+        <local:ViewModelLocator x:Key="ViewModelLocator" />
     </Application.Resources>
 </Application>
