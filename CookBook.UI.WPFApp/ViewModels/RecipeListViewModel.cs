@@ -1,8 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 using Castle.Core.Internal;
 using CookBook.BL.Facades;
 using CookBook.BL.Facades.DTOs;
+using Microsoft.Expression.Interactivity.Core;
 
 namespace CookBook.UI.WPFApp.ViewModels
 {
@@ -10,6 +12,7 @@ namespace CookBook.UI.WPFApp.ViewModels
     {
         private readonly RecipeFacade _recipeFacade;
         private ObservableCollection<RecipeListDTO> _recipes;
+        private RecipeListDTO _selectedRecipe;
 
         public RecipeListViewModel(RecipeFacade recipeFacade)
         {
@@ -23,6 +26,17 @@ namespace CookBook.UI.WPFApp.ViewModels
             {
                 if (Equals(value, _recipes)) return;
                 _recipes = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public RecipeListDTO SelectedRecipe
+        {
+            get => _selectedRecipe;
+            set
+            {
+                if (Equals(value, _selectedRecipe)) return;
+                _selectedRecipe = value;
                 OnPropertyChanged();
             }
         }

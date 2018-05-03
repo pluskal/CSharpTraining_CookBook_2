@@ -15,7 +15,14 @@
     <Grid>
         <TabControl>
             <TabItem Header="Recipes">
-                <views:RecipeListView />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <views:RecipeListView   Grid.Column="0" />
+                    <views:RecipeDetailView Grid.Column="1"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Ingredients"/>
         </TabControl>

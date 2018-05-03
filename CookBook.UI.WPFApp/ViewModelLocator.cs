@@ -30,5 +30,6 @@ namespace CookBook.UI.WPFApp
 
         public MainViewModel MainViewModel => new MainViewModel();
         public RecipeListViewModel RecipeListViewModel => new RecipeListViewModel(_recipeFacade);
+        public RecipeDetailViewModel RecipeDetailViewModel=> new RecipeDetailViewModel(_recipeFacade);
     }
 }
