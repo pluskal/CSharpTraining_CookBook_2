@@ -10,6 +10,7 @@
              d:DesignHeight="400"
              d:DataContext="{d:DesignInstance viewModels:RecipeDetailViewModel, IsDesignTimeCreatable=True}"
              DataContext="{Binding RecipeDetailViewModel, Source={StaticResource ViewModelLocator}}"
+             x:Name="RecipeDetailViewControl"
              >
     <Grid DataContext="{Binding RecipeDetailDTO}">
         <Grid.ColumnDefinitions>
@@ -28,7 +29,7 @@
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
 
         <Label    Grid.Row="1" Grid.Column="0" Content="Type" />
-        <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding FoodType}"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding DataContext.FoodTypes, ElementName=RecipeDetailViewControl}" SelectedItem="{Binding FoodType}"/>
 
         <Label   Grid.Row="2" Grid.Column="0" Content="Duration" />
         <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Duration}"/>

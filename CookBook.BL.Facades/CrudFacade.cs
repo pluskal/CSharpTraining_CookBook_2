@@ -13,8 +13,8 @@ namespace CookBook.BL.Facades
         where TListDTO : IId
         where TDetailDTO : class, IId
     {
-        private readonly IMapper _mapper;
-        private readonly RepositoryBase<TEntity> _repository;
+        protected readonly IMapper _mapper;
+        protected readonly RepositoryBase<TEntity> _repository;
 
         public CrudFacade(RepositoryBase<TEntity> repository, IMapper mapper)
         {

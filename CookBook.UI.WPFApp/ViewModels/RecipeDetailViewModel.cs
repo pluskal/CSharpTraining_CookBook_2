@@ -1,5 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using CookBook.BL.Facades;
 using CookBook.BL.Facades.DTOs;
+using CookBook.Shared.Enums;
 using CookBook.UI.WPFApp.ViewModels.Messages;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -23,6 +27,8 @@ namespace CookBook.UI.WPFApp.ViewModels
         {
             RecipeDetailDTO = this._recipeFacade.GetDetail(selectedRecipeMessage.RecipeId);
         }
+
+        public IEnumerable<FoodType> FoodTypes => Enum.GetValues(typeof(FoodType)).Cast<FoodType>().ToArray();
 
         public RecipeDetailDTO RecipeDetailDTO
         {

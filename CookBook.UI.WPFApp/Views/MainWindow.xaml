@@ -24,7 +24,16 @@
                     <views:RecipeDetailView Grid.Column="1"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Ingredients"/>
+            <TabItem Header="Ingredients">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <views:IngredientListView   Grid.Column="0" />
+                    <views:IngredientDetailView Grid.Column="1"/>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

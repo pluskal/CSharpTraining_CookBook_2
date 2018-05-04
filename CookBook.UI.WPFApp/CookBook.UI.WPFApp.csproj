@@ -88,18 +88,34 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModels\IngredientListViewModel.cs" />
+    <Compile Include="ViewModels\Messages\SelectedIngredientMessage.cs" />
     <Compile Include="ViewModels\RecipeDetailViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RecipeListViewModel.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\Messages\SelectedRecipeMessage.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\IngredientDetailView.xaml.cs">
+      <DependentUpon>IngredientDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IngredientListView.xaml.cs">
+      <DependentUpon>IngredientListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RecipeDetailView.xaml.cs">
       <DependentUpon>RecipeDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RecipeListView.xaml.cs">
       <DependentUpon>RecipeListView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\IngredientDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\IngredientListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -160,6 +176,10 @@
     <ProjectReference Include="..\CookBook.DAL\CookBook.DAL.csproj">
       <Project>{EB39FF08-E832-4013-8E42-5CC0E70D6562}</Project>
       <Name>CookBook.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CookBook.Shared\CookBook.Shared.csproj">
+      <Project>{6917681D-C10A-4DB2-B454-DA91FFFBDB29}</Project>
+      <Name>CookBook.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
