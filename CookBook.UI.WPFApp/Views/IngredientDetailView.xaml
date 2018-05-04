@@ -1,4 +1,38 @@
 <UserControl x:Class="CookBook.UI.WPFApp.Views.IngredientDetailView"
-	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:wpfApp="clr-namespace:CookBook.UI.WPFApp"
+             xmlns:viewModels="clr-namespace:CookBook.UI.WPFApp.ViewModels"
+             mc:Ignorable="d"
+             d:DesignWidth="300"
+             d:DesignHeight="400"
+             d:DataContext="{d:DesignInstance viewModels:IngredientDetailViewModel, IsDesignTimeCreatable=True}"
+             DataContext="{Binding IngredientDetailViewModel, Source={StaticResource ViewModelLocator}}"
+             x:Name="IngredientDetailViewControl">
+    <Grid DataContext="{Binding IngredientDetailDTO}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label   Grid.Row="0" Grid.Column="0" Content="Name" />
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
+
+        <Label   Grid.Row="1" Grid.Column="0" Content="Duration" />
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Amount}"/>
+
+        <Label    Grid.Row="2" Grid.Column="0" Content="Type" />
+        <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding DataContext.Units, ElementName=IngredientDetailViewControl}" SelectedItem="{Binding Unit}"/>
+
+        <Label   Grid.Row="3" Grid.Column="0" Content="Description" />
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Description}"/>
+    </Grid>
 </UserControl>
