@@ -5,7 +5,7 @@ using System.Windows.Input;
 using CookBook.BL.Facades;
 using CookBook.BL.Facades.DTOs;
 using CookBook.Shared.Enums;
-using CookBook.UI.WPFApp.ViewModels.Messages;
+using CookBook.UI.WPFApp.Messages;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 

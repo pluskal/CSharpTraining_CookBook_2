@@ -1,6 +1,6 @@
 using System;
 
-namespace CookBook.UI.WPFApp.ViewModels.Messages
+namespace CookBook.UI.WPFApp.Messages
 {
     public class SelectedRecipeMessage
     {

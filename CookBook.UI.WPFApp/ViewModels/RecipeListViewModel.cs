@@ -3,7 +3,7 @@ using System.Windows.Input;
 using Castle.Core.Internal;
 using CookBook.BL.Facades;
 using CookBook.BL.Facades.DTOs;
-using CookBook.UI.WPFApp.ViewModels.Messages;
+using CookBook.UI.WPFApp.Messages;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 

@@ -4,7 +4,7 @@ using System.Linq;
 using CookBook.BL.Facades;
 using CookBook.BL.Facades.DTOs;
 using CookBook.Shared.Enums;
-using CookBook.UI.WPFApp.ViewModels.Messages;
+using CookBook.UI.WPFApp.Messages;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CookBook.UI.WPFApp.ViewModels
