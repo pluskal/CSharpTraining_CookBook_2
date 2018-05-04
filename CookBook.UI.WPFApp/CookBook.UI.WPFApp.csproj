@@ -90,6 +90,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\IngredientDetailViewModel.cs" />
     <Compile Include="ViewModels\IngredientListViewModel.cs" />
+    <Compile Include="ViewModels\Messages\IngredientsChanged.cs" />
     <Compile Include="ViewModels\Messages\SelectedIngredientMessage.cs" />
     <Compile Include="ViewModels\RecipeDetailViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

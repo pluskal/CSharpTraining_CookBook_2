@@ -126,7 +126,9 @@ namespace CookBook.BL.Facades.Tests
             Assert.Equal(RecipeEntity.FoodType, entity.FoodType);
 
             var ingredientAmountEntity = entity.Ingredients.First();
-            
+
+            Assert.Equal(RecipeDetailDTO.Id, ingredientAmountEntity.RecipeId);
+            Assert.Equal(IngredientEntity.Id, ingredientAmountEntity.IngredientId);
             Assert.Equal(IngredientAmountEntity.Amount, ingredientAmountEntity.Amount);
             Assert.Equal(IngredientAmountEntity.Unit, ingredientAmountEntity.Unit);
 

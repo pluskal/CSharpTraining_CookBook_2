@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using CookBook.BL.Repository;
 using CookBook.BL.Repository.Base;
 using CookBook.DAL.Entities.Base;
 using CookBook.Shared.Interfaces;
@@ -15,11 +16,13 @@ namespace CookBook.BL.Facades
     {
         private readonly IMapper _mapper;
         private readonly RepositoryBase<TEntity> _repository;
+        private readonly UnitOfWork _unitOfWork;
 
         public CrudFacade(RepositoryBase<TEntity> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
+            _unitOfWork = repository.UnitOfWork;
         }
 
         public IEnumerable<TListDTO> GetList()
@@ -44,9 +47,21 @@ namespace CookBook.BL.Facades
             else
                 _repository.Update(entity);
 
-            _repository.UnitOfWork.Commit();
+            _unitOfWork.Commit();
 
             return _mapper.Map<TDetailDTO>(entity);
+        }
+
+        public void Delete(TDetailDTO detailDTO)
+        {
+            this._repository.Delete(detailDTO.Id);
+            _unitOfWork.Commit();
+        }
+
+        public void Delete(Guid id)
+        {
+            this._repository.Delete(id);
+            _unitOfWork.Commit();
         }
 
         public TDetailDTO InitializeNew()

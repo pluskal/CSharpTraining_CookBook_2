@@ -56,7 +56,9 @@ namespace CookBook.BL.Repository.Base
 
         public void Update(TEntity ingredientEntity)
         {
-            UnitOfWork.Context.Entry(ingredientEntity).State = EntityState.Modified;
+            this.Delete(ingredientEntity.Id);
+            this.Insert(ingredientEntity);
+            //UnitOfWork.Context.Entry(ingredientEntity).State = EntityState.Modified;
         }
 
         public TEntity InitializeNew()

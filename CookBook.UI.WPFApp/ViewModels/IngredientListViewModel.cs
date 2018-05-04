@@ -20,6 +20,13 @@ namespace CookBook.UI.WPFApp.ViewModels
             _messenger = messenger;
             _ingredientFacade = ingredientFacade;
             SelectionChangedCommand = new RelayCommand<IngredientDTO>(OnSelectionChanged);
+
+            this._messenger.Register<IngredientsChanged>(this,OnIngredientsChanged);
+        }
+
+        private void OnIngredientsChanged(IngredientsChanged obj)
+        {
+            this.ReloadIngredients();
         }
 
         public ObservableCollection<IngredientDTO> Ingredients
@@ -44,7 +51,12 @@ namespace CookBook.UI.WPFApp.ViewModels
         protected override void OnLoad()
         {
             if (Ingredients.IsNullOrEmpty())
-                Ingredients = new ObservableCollection<IngredientDTO>(_ingredientFacade.GetList());
+                ReloadIngredients();
+        }
+
+        private void ReloadIngredients()
+        {
+            Ingredients = new ObservableCollection<IngredientDTO>(_ingredientFacade.GetList());
         }
     }
 }
