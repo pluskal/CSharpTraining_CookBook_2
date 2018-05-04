@@ -5,10 +5,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:wpfApp="clr-namespace:CookBook.UI.WPFApp"
              xmlns:viewModels="clr-namespace:CookBook.UI.WPFApp.ViewModels"
+             xmlns:views="clr-namespace:CookBook.UI.WPFApp.Views"
              mc:Ignorable="d"
              d:DesignWidth="300"
              d:DesignHeight="400"
-             d:DataContext="{d:DesignInstance viewModels:RecipeDetailViewModel, IsDesignTimeCreatable=false}"
+             d:DataContext="{d:DesignInstance viewModels:RecipeDetailViewModel, IsDesignTimeCreatable=False}"
              DataContext="{Binding RecipeDetailViewModel, Source={StaticResource ViewModelLocator}}"
              x:Name="RecipeDetailViewControl"
              >
@@ -35,7 +36,8 @@
         <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Duration}"/>
 
         <Label    Grid.Row="3" Grid.Column="0" Content="Ingredients" />
-        <ListView Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Ingredients}" />
+        <views:IngredientAmountList Grid.Row="3" Grid.Column="1" 
+               DataContext="{Binding DataContext, ElementName=RecipeDetailViewControl}"/>
 
         <Label   Grid.Row="4" Grid.Column="0" Content="Description" />
         <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Description}"/>

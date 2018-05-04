@@ -93,5 +93,18 @@ namespace CookBook.BL.Facades.Tests
             //Assert
             Assert.Equal(random.ToString(), ingredient.Description);
         }
+
+        [Fact]
+        public void _Delete_IngredientDeleted()
+        {
+            ////Arrange
+            
+
+            ////Act
+            //ingredient = _facadeSUT.Delete();
+
+            ////Assert
+            //Assert.Equal(random.ToString(), ingredient.Description);
+        }
     }
 }

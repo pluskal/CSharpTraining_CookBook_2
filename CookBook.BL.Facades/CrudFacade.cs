@@ -54,8 +54,7 @@ namespace CookBook.BL.Facades
 
         public void Delete(TDetailDTO detailDTO)
         {
-            this._repository.Delete(detailDTO.Id);
-            _unitOfWork.Commit();
+           this.Delete(detailDTO.Id);
         }
 
         public void Delete(Guid id)

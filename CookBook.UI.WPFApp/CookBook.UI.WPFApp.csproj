@@ -87,6 +87,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\IngredientAmountList.xaml.cs">
+      <DependentUpon>IngredientAmountList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\IngredientDetailViewModel.cs" />
     <Compile Include="ViewModels\IngredientListViewModel.cs" />
@@ -110,6 +113,10 @@
     <Compile Include="Views\RecipeListView.xaml.cs">
       <DependentUpon>RecipeListView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\IngredientAmountList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\IngredientDetailView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

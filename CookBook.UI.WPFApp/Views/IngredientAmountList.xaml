@@ -1,0 +1,49 @@
+<UserControl x:Class="CookBook.UI.WPFApp.Views.IngredientAmountList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:CookBook.UI.WPFApp.ViewModels"
+             mc:Ignorable="d"
+             d:DesignWidth="300"
+             d:DesignHeight="400"
+             d:DataContext="{d:DesignInstance viewModels:RecipeDetailViewModel, IsDesignTimeCreatable=False}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="+" 
+                      Command="{Binding AddIngredientCommand}" />
+            <MenuItem Header="-" 
+                      Command="{Binding DeleteIngredientCommand}" 
+                      CommandParameter="{Binding SelectedItem ,ElementName=IngredientListView}" />
+        </Menu>
+        <ListView
+                   Grid.Row="1"
+                   MaxHeight="100"
+                   MinHeight="20"
+                   x:Name="IngredientListView"
+                   >
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Add" 
+                              Command="{Binding AddIngredientCommand}" />
+                    <MenuItem Header="Delete"
+                              Command="{Binding DeleteIngredientCommand}"
+                              CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ListView}, 
+                                                                         Path=SelectedItem}" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ingredient name" DisplayMemberBinding="{Binding Name}"        Width="120" />
+                    <GridViewColumn Header="Description"     DisplayMemberBinding="{Binding Description}" Width="120" />
+                    <GridViewColumn Header="Amount"          DisplayMemberBinding="{Binding Amount}"      Width="120" />
+                    <GridViewColumn Header="Unit"            DisplayMemberBinding="{Binding Unit}"        Width="120" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>
