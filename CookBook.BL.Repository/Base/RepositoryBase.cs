@@ -30,15 +30,15 @@ namespace CookBook.BL.Repository.Base
             return UnitOfWork.Context.Set<TEntity>().FirstOrDefault(i => i.Id == id);
         }
 
-        public void Insert(TEntity ingredientEntity)
+        public void Insert(TEntity entity)
         {
-            ingredientEntity.Id = Guid.NewGuid();
-            UnitOfWork.Context.Set<TEntity>().Add(ingredientEntity);
+            entity.Id = Guid.NewGuid();
+            UnitOfWork.Context.Set<TEntity>().Add(entity);
         }
 
-        public void Delete(TEntity ingredientEntity)
+        public void Delete(TEntity entity)
         {
-            UnitOfWork.Context.Set<TEntity>().Remove(ingredientEntity);
+            UnitOfWork.Context.Set<TEntity>().Remove(entity);
         }
 
         public void Delete(Guid id)
@@ -54,11 +54,11 @@ namespace CookBook.BL.Repository.Base
             Delete(entity);
         }
 
-        public void Update(TEntity ingredientEntity)
+        public void Update(TEntity entity)
         {
-            this.Delete(ingredientEntity.Id);
-            this.Insert(ingredientEntity);
-            //UnitOfWork.Context.Entry(ingredientEntity).State = EntityState.Modified;
+            this.Delete(entity.Id);
+            this.Insert(entity);
+            //UnitOfWork.Context.Entry(entity).State = EntityState.Modified;
         }
 
         public TEntity InitializeNew()
