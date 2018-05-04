@@ -66,7 +66,7 @@ namespace CookBook.BL.Facades.Tests
         public void NewIngredientDTO_Save_IngredientSaved()
         {
             //Arrange
-            var ingredient = new IngredientDetailDTO {Name = "Milk", Description = "3.5%"};
+            var ingredient = new IngredientDTO {Name = "Milk", Description = "3.5%"};
 
             //Act
             ingredient = _facadeSUT.Save(ingredient);
@@ -80,7 +80,7 @@ namespace CookBook.BL.Facades.Tests
         {
             //Arrange
             var random = new Random(DateTime.Now.Millisecond).Next();
-            var ingredient = new IngredientDetailDTO
+            var ingredient = new IngredientDTO
             {
                 Id = Guid.Parse("60923986-c08b-4798-9658-fd2c98ca8da4"),
                 Name = "Milk",

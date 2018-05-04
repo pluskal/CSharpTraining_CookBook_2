@@ -19,7 +19,7 @@ namespace CookBook.BL.Facades.Tests
                 Name = nameof(IngredientEntity.Name),
                 Description = nameof(IngredientEntity.Description)
             };
-            IngredientDetailDTO = new IngredientDetailDTO
+            IngredientDTO = new IngredientDTO
             {
                 Id = Guid.Parse("60923986-c08b-4798-9658-fd2c98ca8da4"),
                 Name = nameof(IngredientEntity.Name),
@@ -29,27 +29,14 @@ namespace CookBook.BL.Facades.Tests
 
         private readonly IMapper _mapper;
         public IngredientEntity IngredientEntity { get; }
-        public IngredientDetailDTO IngredientDetailDTO { get; }
+        public IngredientDTO IngredientDTO { get; }
 
         [Fact]
-        public void IngredientEntity_IngredientDetailDTO()
+        public void IngredientDTO_IngredientEntity()
         {
             //Arrange
             //Act
-            var detailDTO = _mapper.Map<IngredientDetailDTO>(IngredientEntity);
-
-            //Assert
-            Assert.Equal(IngredientEntity.Id, detailDTO.Id);
-            Assert.Equal(IngredientEntity.Name, detailDTO.Name);
-            Assert.Equal(IngredientEntity.Description, detailDTO.Description);
-        }
-
-        [Fact]
-        public void IngredientDetailDTO_IngredientEntity()
-        {
-            //Arrange
-            //Act
-            var entity = _mapper.Map<IngredientEntity>(IngredientDetailDTO);
+            var entity = _mapper.Map<IngredientEntity>(IngredientDTO);
 
             //Assert
             Assert.Equal(IngredientEntity.Id, entity.Id);
@@ -58,11 +45,11 @@ namespace CookBook.BL.Facades.Tests
         }
 
         [Fact]
-        public void IngredientEntity_IngredientListDTO()
+        public void IngredientEntity_IngredientLiDTO()
         {
             //Arrange
             //Act
-            var listDto = _mapper.Map<IngredientListDTO>(IngredientEntity);
+            var listDto = _mapper.Map<IngredientDTO>(IngredientEntity);
 
             //Assert
             Assert.Equal(IngredientEntity.Id, listDto.Id);

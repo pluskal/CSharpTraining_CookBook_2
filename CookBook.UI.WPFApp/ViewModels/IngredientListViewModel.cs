@@ -13,16 +13,16 @@ namespace CookBook.UI.WPFApp.ViewModels
     {
         private readonly IngredientFacade _ingredientFacade;
         private readonly Messenger _messenger;
-        private ObservableCollection<IngredientListDTO> _ingredients;
+        private ObservableCollection<IngredientDTO> _ingredients;
 
         public IngredientListViewModel(Messenger messenger, IngredientFacade ingredientFacade)
         {
             _messenger = messenger;
             _ingredientFacade = ingredientFacade;
-            SelectionChangedCommand = new RelayCommand<IngredientListDTO>(OnSelectionChanged);
+            SelectionChangedCommand = new RelayCommand<IngredientDTO>(OnSelectionChanged);
         }
 
-        public ObservableCollection<IngredientListDTO> Ingredients
+        public ObservableCollection<IngredientDTO> Ingredients
         {
             get => _ingredients;
             set
@@ -35,7 +35,7 @@ namespace CookBook.UI.WPFApp.ViewModels
 
         public ICommand SelectionChangedCommand { get; }
 
-        private void OnSelectionChanged(IngredientListDTO selectedIngredient)
+        private void OnSelectionChanged(IngredientDTO selectedIngredient)
         {
             if (selectedIngredient == null) return;
             _messenger.Send(new SelectedIngredientMessage {IngredientId = selectedIngredient.Id});
@@ -44,7 +44,7 @@ namespace CookBook.UI.WPFApp.ViewModels
         protected override void OnLoad()
         {
             if (Ingredients.IsNullOrEmpty())
-                Ingredients = new ObservableCollection<IngredientListDTO>(_ingredientFacade.GetList());
+                Ingredients = new ObservableCollection<IngredientDTO>(_ingredientFacade.GetList());
         }
     }
 }

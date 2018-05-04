@@ -8,17 +8,15 @@ namespace CookBook.BL.Facades.Mappings
     {
         public IngredientMappingProfile()
         {
-            this.CreateMap<IngredientEntity, IngredientListDTO>();
-            this.CreateMap<IngredientEntity, IngredientDetailDTO>();
-            this.CreateMap<IngredientDetailDTO, IngredientEntity>();
+            this.CreateMap<IngredientEntity, IngredientDTO>();
+            this.CreateMap<IngredientDTO, IngredientEntity>();
 
-            this.CreateMap<IngredientAmountEntity, IngredientDetailDTO>()
-                .ForMember(d => d.Id, opt => opt.MapFrom(src => src.Ingredient.Id))
+            this.CreateMap<IngredientAmountEntity, IngredientAmountDTO>()
                 .ForMember(d => d.Name, opt => opt.MapFrom(src => src.Ingredient.Name))
                 .ForMember(d => d.Description, opt => opt.MapFrom(src => src.Ingredient.Description));
 
-            this.CreateMap<IngredientDetailDTO, IngredientAmountEntity>()
-                .ForPath(d => d.Ingredient.Id, opt => opt.MapFrom(src => src.Id))
+            this.CreateMap<IngredientAmountDTO, IngredientAmountEntity>()
+                .ForPath(d => d.Ingredient.Id, opt => opt.MapFrom(src => src.IngredientId))
                 .ForPath(d => d.Ingredient.Name, opt => opt.MapFrom(src => src.Name))
                 .ForPath(d => d.Ingredient.Description, opt => opt.MapFrom(src => src.Description));
         }

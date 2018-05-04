@@ -5,7 +5,7 @@ using CookBook.DAL.Entities;
 
 namespace CookBook.BL.Facades
 {
-    public class IngredientFacade : CrudFacade<IngredientEntity, IngredientListDTO, IngredientDetailDTO>
+    public class IngredientFacade : CrudFacade<IngredientEntity, IngredientDTO, IngredientDTO>
     {
         public IngredientFacade(IngredientRepository repository, IMapper mapper) : base(repository, mapper)
         {

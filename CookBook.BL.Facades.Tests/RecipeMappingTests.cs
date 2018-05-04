@@ -53,11 +53,12 @@ namespace CookBook.BL.Facades.Tests
                 Description = RecipeEntity.Description,
                 Duration = RecipeEntity.Duration,
                 FoodType = RecipeEntity.FoodType,
-                Ingredients = new List<IngredientDetailDTO>()
+                Ingredients = new List<IngredientAmountDTO>()
                 {
-                    new IngredientDetailDTO()
+                    new IngredientAmountDTO()
                     {
-                        Id = IngredientEntity.Id,
+                        RecipeId = RecipeEntity.Id,
+                        IngredientId = IngredientEntity.Id,
                         Name = IngredientEntity.Name,
                         Description = IngredientEntity.Description,
                         Amount = IngredientAmountEntity.Amount,
@@ -87,12 +88,13 @@ namespace CookBook.BL.Facades.Tests
             Assert.Equal(RecipeEntity.Duration, detailDTO.Duration);
             Assert.Equal(RecipeEntity.FoodType, detailDTO.FoodType);
 
-            var ingredientDetailDTO = detailDTO.Ingredients.First();
-            Assert.Equal(IngredientEntity.Id, ingredientDetailDTO.Id);
-            Assert.Equal(IngredientEntity.Name, ingredientDetailDTO.Name);
-            Assert.Equal(IngredientEntity.Description, ingredientDetailDTO.Description);
-            Assert.Equal(IngredientAmountEntity.Amount, ingredientDetailDTO.Amount);
-            Assert.Equal(IngredientAmountEntity.Unit, ingredientDetailDTO.Unit);
+            var ingredientAmountDTO = detailDTO.Ingredients.First();
+            Assert.Equal(RecipeEntity.Id, ingredientAmountDTO.RecipeId);
+            Assert.Equal(IngredientEntity.Id, ingredientAmountDTO.IngredientId);
+            Assert.Equal(IngredientEntity.Name, ingredientAmountDTO.Name);
+            Assert.Equal(IngredientEntity.Description, ingredientAmountDTO.Description);
+            Assert.Equal(IngredientAmountEntity.Amount, ingredientAmountDTO.Amount);
+            Assert.Equal(IngredientAmountEntity.Unit, ingredientAmountDTO.Unit);
         }
 
         [Fact]

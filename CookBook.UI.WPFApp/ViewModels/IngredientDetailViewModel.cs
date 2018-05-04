@@ -13,7 +13,7 @@ namespace CookBook.UI.WPFApp.ViewModels
     {
         private readonly Messenger _messenger;
         private readonly IngredientFacade _ingredientFacade;
-        private IngredientDetailDTO _ingredientDetailDTO;
+        private IngredientDTO _ingredientDetailDTO;
 
         public IngredientDetailViewModel(Messenger messenger, IngredientFacade ingredientFacade)
         {
@@ -23,7 +23,7 @@ namespace CookBook.UI.WPFApp.ViewModels
             _messenger.Register<SelectedIngredientMessage>(this, OnSelectedIngredient);
         }
 
-        public IngredientDetailDTO IngredientDetailDTO
+        public IngredientDTO IngredientDetailDTO
         {
             get => _ingredientDetailDTO;
             private set

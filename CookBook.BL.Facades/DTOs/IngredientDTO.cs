@@ -4,7 +4,7 @@ using CookBook.Shared.Interfaces;
 
 namespace CookBook.BL.Facades.DTOs
 {
-    public class IngredientListDTO : IId
+    public class IngredientDTO : IId
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
