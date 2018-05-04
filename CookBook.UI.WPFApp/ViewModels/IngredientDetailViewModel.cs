@@ -13,7 +13,7 @@ namespace CookBook.UI.WPFApp.ViewModels
     {
         private readonly Messenger _messenger;
         private readonly IngredientFacade _ingredientFacade;
-        private IngredientDTO _ingredientDetailDTO;
+        private IngredientDTO _ingredientDTO;
 
         public IngredientDetailViewModel(Messenger messenger, IngredientFacade ingredientFacade)
         {
@@ -23,13 +23,13 @@ namespace CookBook.UI.WPFApp.ViewModels
             _messenger.Register<SelectedIngredientMessage>(this, OnSelectedIngredient);
         }
 
-        public IngredientDTO IngredientDetailDTO
+        public IngredientDTO IngredientDTO
         {
-            get => _ingredientDetailDTO;
+            get => _ingredientDTO;
             private set
             {
-                if (Equals(value, _ingredientDetailDTO)) return;
-                _ingredientDetailDTO = value;
+                if (Equals(value, _ingredientDTO)) return;
+                _ingredientDTO = value;
                 OnPropertyChanged();
             }
         }
@@ -37,7 +37,7 @@ namespace CookBook.UI.WPFApp.ViewModels
         
         private void OnSelectedIngredient(SelectedIngredientMessage selectedIngredientMessage)
         {
-           IngredientDetailDTO = this._ingredientFacade.GetDetail(selectedIngredientMessage.IngredientId);
+           IngredientDTO = this._ingredientFacade.GetDetail(selectedIngredientMessage.IngredientId);
         }
 
         protected override void Dispose(bool disposing)

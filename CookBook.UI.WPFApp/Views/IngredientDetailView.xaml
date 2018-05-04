@@ -11,7 +11,7 @@
              d:DataContext="{d:DesignInstance viewModels:IngredientDetailViewModel, IsDesignTimeCreatable=True}"
              DataContext="{Binding IngredientDetailViewModel, Source={StaticResource ViewModelLocator}}"
              x:Name="IngredientDetailViewControl">
-    <Grid DataContext="{Binding IngredientDetailDTO}">
+    <Grid DataContext="{Binding IngredientDTO}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
