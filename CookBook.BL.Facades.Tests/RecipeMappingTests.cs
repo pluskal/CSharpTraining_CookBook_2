@@ -132,9 +132,7 @@ namespace CookBook.BL.Facades.Tests
             Assert.Equal(IngredientAmountEntity.Amount, ingredientAmountEntity.Amount);
             Assert.Equal(IngredientAmountEntity.Unit, ingredientAmountEntity.Unit);
 
-            Assert.Equal(IngredientEntity.Id, ingredientAmountEntity.Ingredient.Id);
-            Assert.Equal(IngredientEntity.Name, ingredientAmountEntity.Ingredient.Name);
-            Assert.Equal(IngredientEntity.Description, ingredientAmountEntity.Ingredient.Description);
+            Assert.Null(ingredientAmountEntity.Ingredient);
         }
     }
 }
