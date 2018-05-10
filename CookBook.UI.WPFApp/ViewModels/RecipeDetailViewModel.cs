@@ -28,7 +28,7 @@ namespace CookBook.UI.WPFApp.ViewModels
 
             _messenger.Register<SelectedRecipeMessage>(this, OnSelectedRecipe);
 
-            AddIngredientCommand = new RelayCommand(OnAddIngredient);
+            AddIngredientCommand = new RelayCommand<Ingredient>(OnAddIngredient);
             RemoveIngredientCommand = new RelayCommand<IngredientAmount>(OnRemoveIngredient);
 
             this._messenger.Register<IngredientsChanged>(this,OnIngredientsChanged);
@@ -78,8 +78,13 @@ namespace CookBook.UI.WPFApp.ViewModels
             IngredientList = _ingredientFacadeAdapter.GetList();
         }
 
-        private void OnAddIngredient()
+        private void OnAddIngredient(Ingredient ingredient)
         {
+            if (ingredient == null)
+            {
+                return;
+            }
+            this.RecipeDetail.Ingredients.Add(new IngredientAmount(this.RecipeDetail, ingredient));
         }
 
         private void OnRemoveIngredient(IngredientAmount ingredientAmount)

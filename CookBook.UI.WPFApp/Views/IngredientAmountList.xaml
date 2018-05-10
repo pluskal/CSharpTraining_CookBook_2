@@ -22,12 +22,17 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="+" 
-                      Command="{Binding AddIngredientCommand}" />
+                      Command="{Binding AddIngredientCommand}"
+                      CommandParameter="{Binding SelectedItem, ElementName=IngredientListComboBox}"/>
             <MenuItem Header="-" 
                       Command="{Binding RemoveIngredientCommand}" 
-                      CommandParameter="{Binding SelectedItem ,ElementName=IngredientListView}" />
+                      CommandParameter="{Binding SelectedItem,
+                                         ElementName=IngredientListView}" />
         </Menu>
-        <ComboBox Grid.Row="1" ItemsSource="{Binding IngredientList}">
+        <ComboBox 
+            Grid.Row="1" 
+            ItemsSource="{Binding IngredientList}"
+            x:Name="IngredientListComboBox">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Name}" />
@@ -43,8 +48,6 @@
                    >
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Add" 
-                              Command="{Binding AddIngredientCommand}" />
                     <MenuItem Header="Delete"
                               Command="{Binding RemoveIngredientCommand}"
                               CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, 
