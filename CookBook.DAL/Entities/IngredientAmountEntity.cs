@@ -14,7 +14,7 @@ namespace CookBook.DAL.Entities
         public Guid IngredientId { get; set; }
         public Unit Unit { get; set; }
         public int Amount { get; set; }
-        public virtual RecipeEntity Recipe { get; set; }
-        public virtual IngredientEntity Ingredient { get; set; }
+        public RecipeEntity Recipe { get; set; }
+        public IngredientEntity Ingredient { get; set; }
     }
 }

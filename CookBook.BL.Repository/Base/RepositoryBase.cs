@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
+using CookBook.DAL;
 using CookBook.DAL.Entities.Base;
 
 namespace CookBook.BL.Repository.Base
@@ -25,9 +27,16 @@ namespace CookBook.BL.Repository.Base
             return UnitOfWork.Context.Set<TEntity>().ToArray();
         }
 
-        public TEntity GetById(Guid id)
+        public TEntity GetById(Guid id, Expression<Func<TEntity, Object>>[] entityIncludes)
         {
-            return UnitOfWork.Context.Set<TEntity>().FirstOrDefault(i => i.Id == id);
+            IQueryable<TEntity> query = UnitOfWork.Context.Set<TEntity>();
+
+            foreach (var include in entityIncludes)
+            {
+                query = query.Include(include);
+            }
+
+            return query.FirstOrDefault(i => i.Id == id);
         }
 
         public void Insert(TEntity entity)
@@ -56,9 +65,7 @@ namespace CookBook.BL.Repository.Base
 
         public void Update(TEntity entity)
         {
-            this.Delete(entity.Id);
-            this.Insert(entity);
-            //UnitOfWork.Context.Entry(entity).State = EntityState.Modified;
+            UnitOfWork.Context.Entry(entity).State = EntityState.Modified;
         }
 
         public TEntity InitializeNew()

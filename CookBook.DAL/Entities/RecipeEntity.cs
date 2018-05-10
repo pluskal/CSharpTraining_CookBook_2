@@ -12,7 +12,7 @@ namespace CookBook.DAL.Entities
         public FoodType FoodType { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<IngredientAmountEntity> Ingredients { get; set; } =
+        public ICollection<IngredientAmountEntity> Ingredients { get; set; } =
             new List<IngredientAmountEntity>();
     }
 }

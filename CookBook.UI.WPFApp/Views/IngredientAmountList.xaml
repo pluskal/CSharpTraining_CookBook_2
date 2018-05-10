@@ -4,36 +4,51 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:CookBook.UI.WPFApp.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              d:DesignWidth="300"
              d:DesignHeight="400"
              d:DataContext="{d:DesignInstance viewModels:RecipeDetailViewModel, IsDesignTimeCreatable=False}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Menu>
+        <Menu Grid.Row="0">
             <MenuItem Header="+" 
                       Command="{Binding AddIngredientCommand}" />
             <MenuItem Header="-" 
-                      Command="{Binding DeleteIngredientCommand}" 
+                      Command="{Binding RemoveIngredientCommand}" 
                       CommandParameter="{Binding SelectedItem ,ElementName=IngredientListView}" />
         </Menu>
+        <ComboBox Grid.Row="1" ItemsSource="{Binding IngredientList}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Name}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
         <ListView
-                   Grid.Row="1"
+                   Grid.Row="2"
                    MaxHeight="100"
                    MinHeight="20"
                    x:Name="IngredientListView"
+                   ItemsSource="{Binding RecipeDetailDTO.Ingredients}"
                    >
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Add" 
                               Command="{Binding AddIngredientCommand}" />
                     <MenuItem Header="Delete"
-                              Command="{Binding DeleteIngredientCommand}"
-                              CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ListView}, 
-                                                                         Path=SelectedItem}" />
+                              Command="{Binding RemoveIngredientCommand}"
+                              CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, 
+                                                                         Path=PlacementTarget.SelectedItem}" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>

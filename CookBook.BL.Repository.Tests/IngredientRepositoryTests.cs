@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using CookBook.DAL;
 using CookBook.DAL.Entities;
 using CookBook.DAL.Entities.Base;
@@ -167,7 +169,7 @@ namespace CookBook.BL.Repository.Tests
             var expectedIngredient = IngredientSeed.Single(entity => entity.Id == id);
 
             //Act
-            var ingredient = this._repositorySUT.GetById(id);
+            var ingredient = this._repositorySUT.GetById(id, EntityIncludes);
 
             Assert.Equal(expectedIngredient, ingredient);
         }
@@ -185,5 +187,7 @@ namespace CookBook.BL.Repository.Tests
             this._ingredientDbSetMock.Verify(
                 set => set.Remove(It.Is<IngredientEntity>(entity => entity.Id == deletedIngredient.Id)), Times.Once);
         }
+
+        protected virtual Expression<Func<IngredientEntity, Object>>[] EntityIncludes { get; } = { };
     }
 }

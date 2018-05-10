@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using AutoMapper;
 using CookBook.BL.Repository;
 using CookBook.BL.Repository.Base;
@@ -32,7 +33,7 @@ namespace CookBook.BL.Facades
 
         public TDetailDTO GetDetail(Guid id)
         {
-            var entity = _repository.GetById(id);
+            var entity = _repository.GetById(id, this.EntityIncludes);
             if (entity == null) return null;
 
             return _mapper.Map<TDetailDTO>(entity);
@@ -40,12 +41,19 @@ namespace CookBook.BL.Facades
 
         public TDetailDTO Save(TDetailDTO detailDTO)
         {
-            var entity = _mapper.Map<TEntity>(detailDTO);
-
+            TEntity entity;
+            
             if (detailDTO.Id == Guid.Empty)
+            {
+                entity = _mapper.Map<TEntity>(detailDTO);
                 _repository.Insert(entity);
+            }
             else
+            {
+                entity = _repository.GetById(detailDTO.Id, this.EntityIncludes);
+                _mapper.Map(detailDTO, entity);
                 _repository.Update(entity);
+            }
 
             _unitOfWork.Commit();
 
@@ -67,5 +75,7 @@ namespace CookBook.BL.Facades
         {
             return _mapper.Map<TDetailDTO>(_repository.InitializeNew());
         }
+
+        protected virtual Expression<Func<TEntity, Object>>[] EntityIncludes { get; } = { };
     }
 }

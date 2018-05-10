@@ -40,7 +40,7 @@ namespace CookBook.UI.WPFApp.ViewModels
 
         private void OnSave()
         {
-            _ingredientFacade.Save(this.IngredientDTO);
+            this.IngredientDTO = _ingredientFacade.Save(this.IngredientDTO);
             OnIngredientsChanged();
         }
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using AutoMapper;
 using CookBook.BL.Facades.DTOs;
 using CookBook.BL.Repository;
@@ -11,5 +13,12 @@ namespace CookBook.BL.Facades
         public RecipeFacade(RecipeRepository repository, IMapper mapper) : base(repository, mapper)
         {
         }
+
+        protected override Expression<Func<RecipeEntity, object>>[] EntityIncludes { get; }
+        =new Expression<Func<RecipeEntity, object>>[]
+            {
+                recipe => recipe.Ingredients,
+                recipe => recipe.Ingredients.Select(ingredientAmount=>ingredientAmount.Ingredient)
+            };
     }
 }
