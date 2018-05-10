@@ -13,7 +13,7 @@
              DataContext="{Binding RecipeDetailViewModel, Source={StaticResource ViewModelLocator}}"
              x:Name="RecipeDetailViewControl"
              >
-    <Grid DataContext="{Binding RecipeDetailDTO}">
+    <Grid DataContext="{Binding RecipeDetail}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />

@@ -18,8 +18,8 @@ namespace CookBook.BL.Facades.Tests
         {
             _mapper = new Mapper(new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<RecipeMappingProfile>();
-                cfg.AddProfile<IngredientMappingProfile>();
+                cfg.AddProfile<RecipeDTOMappingProfile>();
+                cfg.AddProfile<IngredientDTOMappingProfile>();
             }));
             
 
@@ -59,8 +59,8 @@ namespace CookBook.BL.Facades.Tests
                     {
                         RecipeId = RecipeEntity.Id,
                         IngredientId = IngredientEntity.Id,
-                        Name = IngredientEntity.Name,
-                        Description = IngredientEntity.Description,
+                        IngredientName = IngredientEntity.Name,
+                        IngredientDescription = IngredientEntity.Description,
                         Amount = IngredientAmountEntity.Amount,
                         Unit = IngredientAmountEntity.Unit
                     }
@@ -91,8 +91,8 @@ namespace CookBook.BL.Facades.Tests
             var ingredientAmountDTO = detailDTO.Ingredients.First();
             Assert.Equal(RecipeEntity.Id, ingredientAmountDTO.RecipeId);
             Assert.Equal(IngredientEntity.Id, ingredientAmountDTO.IngredientId);
-            Assert.Equal(IngredientEntity.Name, ingredientAmountDTO.Name);
-            Assert.Equal(IngredientEntity.Description, ingredientAmountDTO.Description);
+            Assert.Equal(IngredientEntity.Name, ingredientAmountDTO.IngredientName);
+            Assert.Equal(IngredientEntity.Description, ingredientAmountDTO.IngredientDescription);
             Assert.Equal(IngredientAmountEntity.Amount, ingredientAmountDTO.Amount);
             Assert.Equal(IngredientAmountEntity.Unit, ingredientAmountDTO.Unit);
         }

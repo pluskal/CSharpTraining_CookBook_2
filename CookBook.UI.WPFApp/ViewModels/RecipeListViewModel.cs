@@ -2,8 +2,9 @@
 using System.Windows.Input;
 using Castle.Core.Internal;
 using CookBook.BL.Facades;
-using CookBook.BL.Facades.DTOs;
+using CookBook.UI.WPFApp.Adapters;
 using CookBook.UI.WPFApp.Messages;
+using CookBook.UI.WPFApp.Models;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -12,26 +13,26 @@ namespace CookBook.UI.WPFApp.ViewModels
     public class RecipeListViewModel : ViewModelBase
     {
         private readonly IMessenger _messenger;
-        private readonly RecipeFacade _recipeFacade;
-        private ObservableCollection<RecipeListDTO> _recipes;
+        private readonly RecipeFacadeAdapter _recipeFacadeAdapter;
+        private ObservableCollection<RecipeList> _recipes;
 
-        public RecipeListViewModel(IMessenger messenger, RecipeFacade recipeFacade)
+        public RecipeListViewModel(IMessenger messenger, RecipeFacadeAdapter recipeFacadeAdapter)
         {
             _messenger = messenger;
-            _recipeFacade = recipeFacade;
+            _recipeFacadeAdapter = recipeFacadeAdapter;
 
-            SelectionChangedCommand = new RelayCommand<RecipeListDTO>(OnSelectionChanged);
+            SelectionChangedCommand = new RelayCommand<RecipeList>(OnSelectionChanged);
         }
 
         public ICommand SelectionChangedCommand { get; }
 
-        private void OnSelectionChanged(RecipeListDTO selectedRecipe)
+        private void OnSelectionChanged(RecipeList selectedRecipe)
         {
             if (selectedRecipe == null) return;
             _messenger.Send(new SelectedRecipeMessage {RecipeId = selectedRecipe.Id});
         }
 
-        public ObservableCollection<RecipeListDTO> Recipes
+        public ObservableCollection<RecipeList> Recipes
         {
             get => _recipes;
             private set
@@ -44,7 +45,7 @@ namespace CookBook.UI.WPFApp.ViewModels
 
         protected override void OnLoad()
         {
-            if (Recipes.IsNullOrEmpty()) Recipes = new ObservableCollection<RecipeListDTO>(_recipeFacade.GetList());
+            if (Recipes.IsNullOrEmpty()) Recipes = new ObservableCollection<RecipeList>(_recipeFacadeAdapter.GetList());
         }
     }
 }

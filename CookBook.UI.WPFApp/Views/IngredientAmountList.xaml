@@ -39,7 +39,7 @@
                    MaxHeight="100"
                    MinHeight="20"
                    x:Name="IngredientListView"
-                   ItemsSource="{Binding RecipeDetailDTO.Ingredients}"
+                   ItemsSource="{Binding RecipeDetail.Ingredients}"
                    >
             <ListView.ContextMenu>
                 <ContextMenu>
@@ -53,8 +53,8 @@
             </ListView.ContextMenu>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Ingredient name" DisplayMemberBinding="{Binding Name}"        Width="120" />
-                    <GridViewColumn Header="Description"     DisplayMemberBinding="{Binding Description}" Width="120" />
+                    <GridViewColumn Header="Ingredient name" DisplayMemberBinding="{Binding IngredientName}"        Width="120" />
+                    <GridViewColumn Header="Description"     DisplayMemberBinding="{Binding IngredientDescription}" Width="120" />
                     <GridViewColumn Header="Amount"          DisplayMemberBinding="{Binding Amount}"      Width="120" />
                     <GridViewColumn Header="Unit"            DisplayMemberBinding="{Binding Unit}"        Width="120" />
                 </GridView>

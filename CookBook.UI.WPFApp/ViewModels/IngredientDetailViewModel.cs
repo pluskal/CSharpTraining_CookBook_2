@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using CookBook.BL.Facades;
-using CookBook.BL.Facades.DTOs;
 using CookBook.Shared.Enums;
+using CookBook.UI.WPFApp.Adapters;
 using CookBook.UI.WPFApp.Messages;
+using CookBook.UI.WPFApp.Models;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -14,15 +15,15 @@ namespace CookBook.UI.WPFApp.ViewModels
     public class IngredientDetailViewModel : ViewModelBase
     {
         private readonly Messenger _messenger;
-        private readonly IngredientFacade _ingredientFacade;
-        private IngredientDTO _ingredientDTO;
+        private readonly IngredientFacadeAdapter _ingredientFacadeAdapter;
+        private Ingredient _ingredient;
 
-        public IngredientDetailViewModel(Messenger messenger, IngredientFacade ingredientFacade)
+        public IngredientDetailViewModel(Messenger messenger, IngredientFacadeAdapter ingredientFacadeAdapter)
         {
             _messenger = messenger;
-            _ingredientFacade = ingredientFacade;
+            _ingredientFacadeAdapter = ingredientFacadeAdapter;
 
-            this.IngredientDTO = this._ingredientFacade.InitializeNew();
+            this.Ingredient = this._ingredientFacadeAdapter.InitializeNew();
 
             _messenger.Register<SelectedIngredientMessage>(this, OnSelectedIngredient);
 
@@ -33,14 +34,14 @@ namespace CookBook.UI.WPFApp.ViewModels
 
         private void OnDelete()
         {
-            _ingredientFacade.Delete(this.IngredientDTO.Id);
+            _ingredientFacadeAdapter.Delete(this.Ingredient.Id);
             this.OnNew();
             OnIngredientsChanged();
         }
 
         private void OnSave()
         {
-            this.IngredientDTO = _ingredientFacade.Save(this.IngredientDTO);
+            this.Ingredient = _ingredientFacadeAdapter.Save(this.Ingredient);
             OnIngredientsChanged();
         }
 
@@ -51,16 +52,16 @@ namespace CookBook.UI.WPFApp.ViewModels
 
         private void OnNew()
         {
-            this.IngredientDTO = this._ingredientFacade.InitializeNew();
+            this.Ingredient = this._ingredientFacadeAdapter.InitializeNew();
         }
 
-        public IngredientDTO IngredientDTO
+        public Ingredient Ingredient
         {
-            get => _ingredientDTO;
+            get => _ingredient;
             private set
             {
-                if (Equals(value, _ingredientDTO)) return;
-                _ingredientDTO = value;
+                if (Equals(value, _ingredient)) return;
+                _ingredient = value;
                 OnPropertyChanged();
             }
         }
@@ -74,7 +75,7 @@ namespace CookBook.UI.WPFApp.ViewModels
 
         private void OnSelectedIngredient(SelectedIngredientMessage selectedIngredientMessage)
         {
-           IngredientDTO = this._ingredientFacade.GetDetail(selectedIngredientMessage.IngredientId);
+           Ingredient = this._ingredientFacadeAdapter.GetDetail(selectedIngredientMessage.IngredientId);
         }
 
         protected override void Dispose(bool disposing)

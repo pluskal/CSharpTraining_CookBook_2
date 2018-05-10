@@ -87,6 +87,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Adapters\CrudFacadeAdapter.cs" />
+    <Compile Include="Adapters\IngredientFacade.cs" />
+    <Compile Include="Adapters\Mappings\IngredientMappingProfile.cs" />
+    <Compile Include="Adapters\Mappings\RecipeMappingProfile.cs" />
+    <Compile Include="Adapters\RecipeFacade.cs" />
+    <Compile Include="Models\IngredientAmount.cs" />
+    <Compile Include="Models\Ingredient.cs" />
+    <Compile Include="Models\RecipeDetail.cs" />
+    <Compile Include="Models\RecipeList.cs" />
     <Compile Include="Views\IngredientAmountList.xaml.cs">
       <DependentUpon>IngredientAmountList.xaml</DependentUpon>
     </Compile>
@@ -175,7 +184,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CookBook.BL.Facades\CookBook.BL.Facades.csproj">
-      <Project>{DDEC83AB-43E4-4D6B-B2A6-FBB3D8A95E2F}</Project>
+      <Project>{ddec83ab-43e4-4d6b-b2a6-fbb3d8a95e2f}</Project>
       <Name>CookBook.BL.Facades</Name>
     </ProjectReference>
     <ProjectReference Include="..\CookBook.BL.Repository\CookBook.BL.Repository.csproj">
@@ -191,8 +200,6 @@
       <Name>CookBook.Shared</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\Messages\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

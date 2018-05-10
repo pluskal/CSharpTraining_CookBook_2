@@ -11,7 +11,7 @@ namespace CookBook.BL.Facades.Tests
     {
         public IngredientMappingTests()
         {
-            _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<IngredientMappingProfile>()));
+            _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<IngredientDTOMappingProfile>()));
 
             IngredientEntity = new IngredientEntity
             {

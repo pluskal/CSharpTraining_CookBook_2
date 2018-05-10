@@ -21,7 +21,7 @@ namespace CookBook.BL.Facades.Tests
             var cookBookDbContext = new CookBookDbContext();
             _unitOfWork = new UnitOfWork(cookBookDbContext);
             var ingredientRepository = new IngredientRepository(_unitOfWork);
-            var mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<IngredientMappingProfile>()));
+            var mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<IngredientDTOMappingProfile>()));
             _facadeSUT = new IngredientFacade(ingredientRepository, mapper);
         }
 

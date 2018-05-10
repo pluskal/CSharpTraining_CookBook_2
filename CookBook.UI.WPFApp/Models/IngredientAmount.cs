@@ -1,11 +1,9 @@
 ﻿using System;
-using CookBook.DAL.Entities.Base;
 using CookBook.Shared.Enums;
-using CookBook.Shared.Interfaces;
 
-namespace CookBook.BL.Facades.DTOs
+namespace CookBook.UI.WPFApp.Models
 {
-    public class IngredientAmountDTO 
+    public class IngredientAmount 
     {
         public Guid RecipeId { get; set; }
         public Guid IngredientId { get; set; }

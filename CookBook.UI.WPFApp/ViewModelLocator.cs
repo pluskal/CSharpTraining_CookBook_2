@@ -3,6 +3,8 @@ using CookBook.BL.Facades;
 using CookBook.BL.Facades.Mappings;
 using CookBook.BL.Repository;
 using CookBook.DAL;
+using CookBook.UI.WPFApp.Adapters;
+using CookBook.UI.WPFApp.Adapters.Mappings;
 using CookBook.UI.WPFApp.ViewModels;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -10,9 +12,9 @@ namespace CookBook.UI.WPFApp
 {
     public class ViewModelLocator
     {
-        private readonly IngredientFacade _ingredientFacade;
-        private readonly RecipeFacade _recipeFacade;
         private readonly Messenger _messenger;
+        private readonly RecipeFacadeAdapter _recipeFacadeAdapter;
+        private readonly IngredientFacadeAdapter _ingredientFacadeAdapter;
 
         public ViewModelLocator()
         {
@@ -22,20 +24,26 @@ namespace CookBook.UI.WPFApp
             var recipeRepository = new RecipeRepository(unitOfWork);
             var configurationProvider = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<IngredientMappingProfile>();
+                cfg.AddProfile<IngredientDTOMappingProfile>();
+                cfg.AddProfile<RecipeDTOMappingProfile>();
                 cfg.AddProfile<RecipeMappingProfile>();
+                cfg.AddProfile<IngredientMappingProfile>();
             });
+
             var mapper = new Mapper(configurationProvider);
-            _ingredientFacade = new IngredientFacade(ingredientRepository, mapper);
-            _recipeFacade = new RecipeFacade(recipeRepository, mapper);
+            var ingredientFacade = new IngredientFacade(ingredientRepository, mapper);
+            var recipeFacade = new RecipeFacade(recipeRepository, mapper);
+
+            _recipeFacadeAdapter = new RecipeFacadeAdapter(recipeFacade, mapper);
+            _ingredientFacadeAdapter = new IngredientFacadeAdapter(ingredientFacade, mapper);
+
             _messenger = new Messenger();
         }
 
         public MainViewModel MainViewModel => new MainViewModel();
-        public RecipeListViewModel RecipeListViewModel => new RecipeListViewModel(_messenger, _recipeFacade);
-        public RecipeDetailViewModel RecipeDetailViewModel=> new RecipeDetailViewModel(_messenger, _recipeFacade, _ingredientFacade);
-        public IngredientListViewModel IngredientListViewModel => new IngredientListViewModel(_messenger, _ingredientFacade);
-
-        public IngredientDetailViewModel IngredientDetailViewModel => new IngredientDetailViewModel(_messenger, _ingredientFacade);
+        public RecipeListViewModel RecipeListViewModel => new RecipeListViewModel(_messenger, _recipeFacadeAdapter);
+        public RecipeDetailViewModel RecipeDetailViewModel=> new RecipeDetailViewModel(_messenger, _recipeFacadeAdapter, _ingredientFacadeAdapter);
+        public IngredientListViewModel IngredientListViewModel => new IngredientListViewModel(_messenger, _ingredientFacadeAdapter);
+        public IngredientDetailViewModel IngredientDetailViewModel => new IngredientDetailViewModel(_messenger, _ingredientFacadeAdapter);
     }
 }
