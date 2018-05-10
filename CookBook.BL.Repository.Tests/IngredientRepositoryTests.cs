@@ -28,11 +28,11 @@ namespace CookBook.BL.Repository.Tests
 
         private static readonly IngredientEntity[] IngredientSeed =
         {
-            new IngredientEntity {Name = "Salt", Description = $"Salty"},
-            new IngredientEntity {Name = "Wheat", Description = $""},
-            new IngredientEntity {Name = "Water", Description = $""},
-            new IngredientEntity {Name = "Ice", Description = $""},
-            new IngredientEntity {Name = "Milk", Description = $""}
+            new IngredientEntity {Name = "Salt", Description = $"SaltyDescription", Id = Guid.Parse("70923986-c08b-4798-9658-fd2c98ca8da5"),},
+            new IngredientEntity {Name = "Wheat", Description = $"WheatDescription", Id = Guid.Parse("11923986-c08b-4798-9658-fd2c98ca8da5"),},
+            new IngredientEntity {Name = "Water", Description = $"WaterDescription", Id = Guid.Parse("12923986-c08b-4798-9658-fd2c98ca8da5"),},
+            new IngredientEntity {Name = "Ice", Description = $"IceDescription", Id = Guid.Parse("13923986-c08b-4798-9658-fd2c98ca8da5"),},
+            new IngredientEntity {Name = "Milk", Description = $"MilkDescription", Id = Guid.Parse("14923986-c08b-4798-9658-fd2c98ca8da5"),}
         };  
 
         private Mock<TestDbSet<TEntity>> CreateDbSet<TEntity>(IList<TEntity> entityList)
@@ -89,9 +89,9 @@ namespace CookBook.BL.Repository.Tests
         public void NewEntities_Insert_EntitiesInserted()
         {
             //Arrange
-            var ingredientEntity1 = new IngredientEntity {Name = "Entity1Name", Description = "Entity1Description"};
-            var ingredientEntity2 = new IngredientEntity {Name = "Entity2Name", Description = "Entity2Description"};
-            var ingredientEntity3 = new IngredientEntity {Name = "Entity3Name", Description = "Entity3Description"};
+            var ingredientEntity1 = new IngredientEntity {Name = "Entity1Name", Description = "Entity1Description", Id = Guid.Parse("70923986-c08b-4798-9658-fd2c98ca8da5"), };
+            var ingredientEntity2 = new IngredientEntity {Name = "Entity2Name", Description = "Entity2Description", Id = Guid.Parse("80923986-c08b-4798-9658-fd2c98ca8da6"), };
+            var ingredientEntity3 = new IngredientEntity {Name = "Entity3Name", Description = "Entity3Description", Id = Guid.Parse("90923986-c08b-4798-9658-fd2c98ca8da7"), };
 
             //Act
             this._repositorySUT.Insert(ingredientEntity1);

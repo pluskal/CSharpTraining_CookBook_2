@@ -11,7 +11,7 @@ namespace CookBook.DAL
         {
             var ingredient = new IngredientEntity()
             {
-                Id = Guid.Empty,
+                Id = Guid.Parse("70923986-c08b-4798-9658-fd2c98ca8da5"),
                 Name = $"{nameof(IngredientEntity.Name)}-Seed",
                 Description = nameof(RecipeEntity.Description),
             };
@@ -24,7 +24,7 @@ namespace CookBook.DAL
             
             var recipe = new RecipeEntity
             {
-                Id = Guid.Empty,
+                Id = Guid.Parse("80923986-c08b-4798-9658-fd2c98ca8da6"),
                 Name = $"{nameof(RecipeEntity.Name)}-Seed",
                 Description = nameof(RecipeEntity.Description),
                 Duration = TimeSpan.FromMinutes(323),
