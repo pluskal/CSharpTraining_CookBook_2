@@ -7,7 +7,7 @@ using CookBook.Shared.Interfaces;
 
 namespace CookBook.UI.WPFApp.Models
 {
-    public class RecipeDetail : BindableBase,IId
+    public class RecipeDetail : ValidableModelBase, IId
     {
         public RecipeDetail()
         {
