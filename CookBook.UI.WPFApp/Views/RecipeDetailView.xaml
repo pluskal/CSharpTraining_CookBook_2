@@ -42,7 +42,10 @@
             </Grid.RowDefinitions>
 
             <Label   Grid.Row="0" Grid.Column="0" Content="Name" />
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name, 
+                                                         UpdateSourceTrigger=PropertyChanged,
+                                                         ValidatesOnDataErrors=True,
+                                                         NotifyOnValidationError=True}"></TextBox>
 
             <Label    Grid.Row="1" Grid.Column="0" Content="Type" />
             <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding DataContext.FoodTypes, ElementName=RecipeDetailViewControl}" SelectedItem="{Binding FoodType}"/>
@@ -55,7 +58,10 @@
                    DataContext="{Binding DataContext, ElementName=RecipeDetailViewControl}"/>
 
             <Label   Grid.Row="4" Grid.Column="0" Content="Description" />
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Description, 
+                                                                UpdateSourceTrigger=PropertyChanged,
+                                                                ValidatesOnDataErrors=True,
+                                                                NotifyOnValidationError=True}"/>
         </Grid>
     </Grid>
 </UserControl>
