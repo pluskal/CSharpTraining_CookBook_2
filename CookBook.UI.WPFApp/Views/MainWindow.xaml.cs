@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Windows;
+using WPFLocalizeExtension.Engine;
 
 namespace CookBook.UI.WPFApp.Views
 {
@@ -9,6 +11,7 @@ namespace CookBook.UI.WPFApp.Views
     {
         public MainWindow()
         {
+            LocalizeDictionary.Instance.Culture = CultureInfo.CurrentUICulture;
             InitializeComponent();
         }
     }

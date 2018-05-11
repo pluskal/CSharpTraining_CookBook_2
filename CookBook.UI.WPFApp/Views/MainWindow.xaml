@@ -5,16 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:CookBook.UI.WPFApp.Views"
         xmlns:viewModels="clr-namespace:CookBook.UI.WPFApp.ViewModels"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="en"
+        lex:ResxLocalizationProvider.DefaultAssembly="CookBook.UI.WPFApp"
+        lex:ResxLocalizationProvider.DefaultDictionary="Resources"
         mc:Ignorable="d"
-        Title="CookBook"
+        Title="{lex:Loc MainWindow.Title}"
         Height="450"
         Width="800"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel, IsDesignTimeCreatable=False}"
         DataContext="{Binding MainViewModel, Source={StaticResource ViewModelLocator}}"
         >
-    <Grid>
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <ComboBox ItemsSource="{Binding MergedAvailableCultures,
+                                                Source={x:Static lex:LocalizeDictionary.Instance}}"
+                          SelectedItem="{Binding Culture,
+                                                 Source={x:Static lex:LocalizeDictionary.Instance}}"
+                          DisplayMemberPath="NativeName"/>
+            </ToolBar>
+        </ToolBarTray>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock>
+                <Run Text="{lex:Loc MainWindow.StatusBar.LanguageLabel}" />
+                <Run Text="{Binding Culture.DisplayName, 
+                                    Mode=OneWay, 
+                                    Source={x:Static lex:LocalizeDictionary.Instance}}" />
+            </TextBlock>
+        </StatusBar>
+        <Grid>
         <TabControl>
-            <TabItem Header="Recipes">
+                <TabItem Header="{lex:Loc MainWindow.Tab.RecipesLabel}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -24,7 +46,7 @@
                     <views:RecipeDetailView Grid.Column="1"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Ingredients">
+                <TabItem Header="{lex:Loc MainWindow.Tab.IngredientsLabel}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -36,4 +58,5 @@
             </TabItem>
         </TabControl>
     </Grid>
+    </DockPanel>
 </Window>

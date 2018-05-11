@@ -5,6 +5,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:CookBook.UI.WPFApp.ViewModels"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             lex:LocalizeDictionary.DesignCulture="en"
+             lex:ResxLocalizationProvider.DefaultAssembly="CookBook.UI.WPFApp"
+             lex:ResxLocalizationProvider.DefaultDictionary="Resources"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:RecipeListViewModel, IsDesignTimeCreatable=False}"
              DataContext="{Binding RecipeListViewModel, Source={StaticResource ViewModelLocator}}"
@@ -24,9 +28,9 @@
             </i:Interaction.Triggers>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Recipe name" DisplayMemberBinding="{Binding Name}"     Width="120" />
-                    <GridViewColumn Header="FoodType"    DisplayMemberBinding="{Binding FoodType}" Width="120" />
-                    <GridViewColumn Header="Duration"    DisplayMemberBinding="{Binding Duration}" Width="120" />
+                    <GridViewColumn Header="{lex:Loc RecipeListView.GridView.RecipeNameLabel}"  DisplayMemberBinding="{Binding Name}"     Width="120" />
+                    <GridViewColumn Header="{lex:Loc RecipeListView.GridView.FoodTypeLabel}"    DisplayMemberBinding="{Binding FoodType}" Width="120" />
+                    <GridViewColumn Header="{lex:Loc RecipeListView.GridView.DurationLabel}"    DisplayMemberBinding="{Binding Duration}" Width="120" />
                 </GridView>
             </ListView.View>
         </ListView>
