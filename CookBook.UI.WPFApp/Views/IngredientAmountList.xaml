@@ -32,7 +32,11 @@
         <ComboBox 
             Grid.Row="1" 
             ItemsSource="{Binding IngredientList}"
-            x:Name="IngredientListComboBox">
+            x:Name="IngredientListComboBox"
+            IsEditable="True"
+            IsTextSearchEnabled="True"
+            TextSearch.TextPath="Name"
+            >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Name}" />
