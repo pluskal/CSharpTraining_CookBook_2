@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Castle.Core.Internal;
-using CookBook.BL.Facades;
 using CookBook.UI.WPFApp.Adapters;
 using CookBook.UI.WPFApp.Messages;
 using CookBook.UI.WPFApp.Models;
@@ -22,14 +21,8 @@ namespace CookBook.UI.WPFApp.ViewModels
             _recipeFacadeAdapter = recipeFacadeAdapter;
 
             SelectionChangedCommand = new RelayCommand<RecipeList>(OnSelectionChanged);
-        }
 
-        public ICommand SelectionChangedCommand { get; }
-
-        private void OnSelectionChanged(RecipeList selectedRecipe)
-        {
-            if (selectedRecipe == null) return;
-            _messenger.Send(new SelectedRecipeMessage {RecipeId = selectedRecipe.Id});
+            _messenger.Register<RecipeChanged>(this, OnRecipeChanged);
         }
 
         public ObservableCollection<RecipeList> Recipes
@@ -43,9 +36,27 @@ namespace CookBook.UI.WPFApp.ViewModels
             }
         }
 
+        public ICommand SelectionChangedCommand { get; }
+
+        private void OnRecipeChanged(RecipeChanged obj)
+        {
+            ReloadRecipes();
+        }
+
+        private void OnSelectionChanged(RecipeList selectedRecipe)
+        {
+            if (selectedRecipe == null) return;
+            _messenger.Send(new SelectedRecipeMessage {RecipeId = selectedRecipe.Id});
+        }
+
         protected override void OnLoad()
         {
-            if (Recipes.IsNullOrEmpty()) Recipes = new ObservableCollection<RecipeList>(_recipeFacadeAdapter.GetList());
+            if (Recipes.IsNullOrEmpty()) ReloadRecipes();
+        }
+
+        private void ReloadRecipes()
+        {
+            Recipes = new ObservableCollection<RecipeList>(_recipeFacadeAdapter.GetList());
         }
     }
 }

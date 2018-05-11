@@ -13,33 +13,49 @@
              DataContext="{Binding RecipeDetailViewModel, Source={StaticResource ViewModelLocator}}"
              x:Name="RecipeDetailViewControl"
              >
-    <Grid DataContext="{Binding RecipeDetail}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="New" 
+                      Command="{Binding NewRecipeCommand}"/>
+            <MenuItem Header="Save" 
+                      Command="{Binding SaveRecipeCommand}"
+                      CommandParameter="{Binding RecipeDetail}"/>
+            <MenuItem Header="Delete" 
+                      Command="{Binding DeleteRecipeCommand}"
+                      CommandParameter="{Binding RecipeDetail}"/>
+        </Menu>
+        <Grid DataContext="{Binding RecipeDetail}" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <Label   Grid.Row="0" Grid.Column="0" Content="Name" />
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
+            <Label   Grid.Row="0" Grid.Column="0" Content="Name" />
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label    Grid.Row="1" Grid.Column="0" Content="Type" />
-        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding DataContext.FoodTypes, ElementName=RecipeDetailViewControl}" SelectedItem="{Binding FoodType}"/>
+            <Label    Grid.Row="1" Grid.Column="0" Content="Type" />
+            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding DataContext.FoodTypes, ElementName=RecipeDetailViewControl}" SelectedItem="{Binding FoodType}"/>
 
-        <Label   Grid.Row="2" Grid.Column="0" Content="Duration" />
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Duration}"/>
+            <Label   Grid.Row="2" Grid.Column="0" Content="Duration" />
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label    Grid.Row="3" Grid.Column="0" Content="Ingredients" />
-        <views:IngredientAmountList Grid.Row="3" Grid.Column="1" 
-               DataContext="{Binding DataContext, ElementName=RecipeDetailViewControl}"/>
+            <Label    Grid.Row="3" Grid.Column="0" Content="Ingredients" />
+            <views:IngredientAmountList Grid.Row="3" Grid.Column="1" 
+                   DataContext="{Binding DataContext, ElementName=RecipeDetailViewControl}"/>
 
-        <Label   Grid.Row="4" Grid.Column="0" Content="Description" />
-        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Description}"/>
+            <Label   Grid.Row="4" Grid.Column="0" Content="Description" />
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
     </Grid>
 </UserControl>

@@ -39,29 +39,43 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ListView
+        <DataGrid
                    Grid.Row="2"
-                   MaxHeight="100"
                    MinHeight="20"
                    x:Name="IngredientListView"
                    ItemsSource="{Binding RecipeDetail.Ingredients}"
+                   AutoGenerateColumns="False"
                    >
-            <ListView.ContextMenu>
+            <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Delete"
                               Command="{Binding RemoveIngredientCommand}"
                               CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, 
                                                                          Path=PlacementTarget.SelectedItem}" />
                 </ContextMenu>
-            </ListView.ContextMenu>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Ingredient name" DisplayMemberBinding="{Binding IngredientName}"        Width="120" />
-                    <GridViewColumn Header="Description"     DisplayMemberBinding="{Binding IngredientDescription}" Width="120" />
-                    <GridViewColumn Header="Amount"          DisplayMemberBinding="{Binding Amount}"      Width="120" />
-                    <GridViewColumn Header="Unit"            DisplayMemberBinding="{Binding Unit}"        Width="120" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+            </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+                <DataGridTextColumn     Header="Name"        Binding="{Binding IngredientName, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn     Header="Description" Binding="{Binding IngredientDescription, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn     Header="Amount"      Binding="{Binding Amount, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridComboBoxColumn Header="Unit"        SelectedItemBinding="{Binding Unit, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" 
+                                    Value="{Binding DataContext.Units, 
+                                                    RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" 
+                                    Value="{Binding DataContext.Units, 
+                                                    RelativeSource={RelativeSource AncestorType=DataGrid}}"></Setter>
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

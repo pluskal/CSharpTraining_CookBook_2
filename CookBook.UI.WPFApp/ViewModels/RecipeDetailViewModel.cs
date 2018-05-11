@@ -18,7 +18,7 @@ namespace CookBook.UI.WPFApp.ViewModels
         private readonly IMessenger _messenger;
         private readonly RecipeFacadeAdapter _recipeFacadeAdapter;
         private IEnumerable<Ingredient> _ingredientList;
-        private RecipeDetail _recipeDetail = new RecipeDetail();
+        private RecipeDetail _recipeDetail;
 
         public RecipeDetailViewModel(IMessenger messenger, RecipeFacadeAdapter recipeFacadeAdapter, IngredientFacadeAdapter ingredientFacadeAdapter)
         {
@@ -31,8 +31,48 @@ namespace CookBook.UI.WPFApp.ViewModels
             AddIngredientCommand = new RelayCommand<Ingredient>(OnAddIngredient);
             RemoveIngredientCommand = new RelayCommand<IngredientAmount>(OnRemoveIngredient);
 
+            NewRecipeCommand = new RelayCommand(OnNewRecipe);
+            SaveRecipeCommand = new RelayCommand<RecipeDetail>(OnSaveRecipe);
+            DeleteRecipeCommand = new RelayCommand<RecipeDetail>(OnDeleteRecipe);
+
             this._messenger.Register<IngredientsChanged>(this,OnIngredientsChanged);
+
+            InitializeNewRecipe();
         }
+
+        private void OnDeleteRecipe(RecipeDetail recipeDetail)
+        {
+            if (recipeDetail == null) return;
+            this._recipeFacadeAdapter.Delete(recipeDetail);
+            this.InitializeNewRecipe();
+        }
+
+        private void NotifyRecipeChanged()
+        {
+            this._messenger.Send(new RecipeChanged());
+        }
+
+        private void OnSaveRecipe(RecipeDetail recipeDetail)
+        {
+            if(recipeDetail == null) return;
+            this.RecipeDetail = this._recipeFacadeAdapter.Save(recipeDetail);
+        }
+
+        private void OnNewRecipe()
+        {
+            InitializeNewRecipe();
+        }
+
+        private void InitializeNewRecipe()
+        {
+            this.RecipeDetail = this._recipeFacadeAdapter.InitializeNew();
+        }
+
+        public ICommand NewRecipeCommand { get; }
+
+        public ICommand SaveRecipeCommand { get; }
+
+        public ICommand DeleteRecipeCommand { get; }
 
         private void OnIngredientsChanged(IngredientsChanged ingredientsChanged)
         {
@@ -42,6 +82,7 @@ namespace CookBook.UI.WPFApp.ViewModels
         public ICommand AddIngredientCommand { get; }
 
         public IEnumerable<FoodType> FoodTypes => Enum.GetValues(typeof(FoodType)).Cast<FoodType>().ToArray();
+        public IEnumerable<Unit> Units => Enum.GetValues(typeof(Unit)).Cast<Unit>().ToArray();
 
         public IEnumerable<Ingredient> IngredientList
         {
@@ -62,6 +103,7 @@ namespace CookBook.UI.WPFApp.ViewModels
                 if (Equals(value, _recipeDetail)) return;
                 _recipeDetail = value;
                 OnPropertyChanged();
+                NotifyRecipeChanged();
             }
         }
 
@@ -84,12 +126,12 @@ namespace CookBook.UI.WPFApp.ViewModels
             {
                 return;
             }
-            this.RecipeDetail.Ingredients.Add(new IngredientAmount(this.RecipeDetail, ingredient));
+            this.RecipeDetail.AddIngredient(new IngredientAmount(this.RecipeDetail, ingredient));
         }
 
         private void OnRemoveIngredient(IngredientAmount ingredientAmount)
         {
-            RecipeDetail.Ingredients.Remove(ingredientAmount);
+            RecipeDetail.RemoveIngredient(ingredientAmount);
             RecipeDetail = _recipeFacadeAdapter.Save(RecipeDetail);
         }
 
