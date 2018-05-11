@@ -42,7 +42,7 @@
             </Grid.RowDefinitions>
 
             <Label   Grid.Row="0" Grid.Column="0" Content="Name" />
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
             <Label    Grid.Row="1" Grid.Column="0" Content="Type" />
             <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding DataContext.FoodTypes, ElementName=RecipeDetailViewControl}" SelectedItem="{Binding FoodType}"/>

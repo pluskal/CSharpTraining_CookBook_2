@@ -100,10 +100,12 @@
     <Compile Include="Adapters\Mappings\IngredientMappingProfile.cs" />
     <Compile Include="Adapters\Mappings\RecipeMappingProfile.cs" />
     <Compile Include="Adapters\RecipeFacade.cs" />
+    <Compile Include="BindableBase.cs" />
     <Compile Include="Models\IngredientAmount.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\RecipeDetail.cs" />
     <Compile Include="Models\RecipeList.cs" />
+    <Compile Include="Validation\RequiredRule.cs" />
     <Compile Include="Views\IngredientAmountList.xaml.cs">
       <DependentUpon>IngredientAmountList.xaml</DependentUpon>
     </Compile>
