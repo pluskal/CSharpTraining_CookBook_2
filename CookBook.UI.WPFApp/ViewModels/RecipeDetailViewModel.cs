@@ -97,12 +97,10 @@ namespace CookBook.UI.WPFApp.ViewModels
 
         public RecipeDetail RecipeDetail
         {
-            get => _recipeDetail;
+            get => this.GetValue(() => this.RecipeDetail);
             set
             {
-                if (Equals(value, _recipeDetail)) return;
-                _recipeDetail = value;
-                OnPropertyChanged();
+                this.SetValue(() => this.RecipeDetail,value);
                 NotifyRecipeChanged();
             }
         }

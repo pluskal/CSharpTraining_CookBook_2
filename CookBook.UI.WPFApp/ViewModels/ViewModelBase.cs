@@ -7,7 +7,7 @@ using Microsoft.Expression.Interactivity.Core;
 
 namespace CookBook.UI.WPFApp.ViewModels
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged, IDisposable
+    public abstract class ViewModelBase : BindableBase, IDisposable
     {
         protected ViewModelBase()
         {
@@ -15,18 +15,11 @@ namespace CookBook.UI.WPFApp.ViewModels
         }
 
         public ICommand LoadedCommand { get; }
-        public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnLoad()
         {
         }
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
+        
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)

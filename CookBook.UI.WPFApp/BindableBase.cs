@@ -9,7 +9,7 @@ using CookBook.UI.WPFApp.Annotations;
 
 namespace CookBook.UI.WPFApp
 {
-    public class BindableBase : INotifyPropertyChanged
+    public abstract class BindableBase : INotifyPropertyChanged
     {
         private readonly Dictionary<string, object> _propertyBackingFields
             = new Dictionary<string, object>();
