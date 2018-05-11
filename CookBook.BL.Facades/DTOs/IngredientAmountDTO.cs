@@ -5,11 +5,12 @@ using CookBook.Shared.Interfaces;
 
 namespace CookBook.BL.Facades.DTOs
 {
-    public class IngredientDetailDTO : IId
+    public class IngredientAmountDTO 
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public Guid RecipeId { get; set; }
+        public Guid IngredientId { get; set; }
+        public string IngredientName { get; set; }
+        public string IngredientDescription { get; set; }
         public Unit Unit { get; set; }
         public int Amount { get; set; }
     }

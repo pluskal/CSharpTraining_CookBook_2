@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
+using CookBook.DAL;
 using CookBook.DAL.Entities.Base;
 
 namespace CookBook.BL.Repository.Base
@@ -25,20 +27,27 @@ namespace CookBook.BL.Repository.Base
             return UnitOfWork.Context.Set<TEntity>().ToArray();
         }
 
-        public TEntity GetById(Guid id)
+        public TEntity GetById(Guid id, Expression<Func<TEntity, Object>>[] entityIncludes)
         {
-            return UnitOfWork.Context.Set<TEntity>().FirstOrDefault(i => i.Id == id);
+            IQueryable<TEntity> query = UnitOfWork.Context.Set<TEntity>();
+
+            foreach (var include in entityIncludes)
+            {
+                query = query.Include(include);
+            }
+
+            return query.FirstOrDefault(i => i.Id == id);
         }
 
-        public void Insert(TEntity ingredientEntity)
+        public void Insert(TEntity entity)
         {
-            ingredientEntity.Id = Guid.NewGuid();
-            UnitOfWork.Context.Set<TEntity>().Add(ingredientEntity);
+            entity.Id = Guid.NewGuid();
+            UnitOfWork.Context.Set<TEntity>().Add(entity);
         }
 
-        public void Delete(TEntity ingredientEntity)
+        public void Delete(TEntity entity)
         {
-            UnitOfWork.Context.Set<TEntity>().Remove(ingredientEntity);
+            UnitOfWork.Context.Set<TEntity>().Remove(entity);
         }
 
         public void Delete(Guid id)
@@ -54,9 +63,9 @@ namespace CookBook.BL.Repository.Base
             Delete(entity);
         }
 
-        public void Update(TEntity ingredientEntity)
+        public void Update(TEntity entity)
         {
-            UnitOfWork.Context.Entry(ingredientEntity).State = EntityState.Modified;
+            UnitOfWork.Context.Entry(entity).State = EntityState.Modified;
         }
 
         public TEntity InitializeNew()

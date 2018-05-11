@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookBook.Shared", "CookBook
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookBook.BL.Facades.Tests", "CookBook.BL.Facades.Tests\CookBook.BL.Facades.Tests.csproj", "{8D8F17DE-D5A7-46EC-AD1D-FBCD19741BAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookBook.UI.WPFApp", "CookBook.UI.WPFApp\CookBook.UI.WPFApp.csproj", "{6FD4E59B-5933-47A2-A57A-097B628AAC66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{8D8F17DE-D5A7-46EC-AD1D-FBCD19741BAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D8F17DE-D5A7-46EC-AD1D-FBCD19741BAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D8F17DE-D5A7-46EC-AD1D-FBCD19741BAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FD4E59B-5933-47A2-A57A-097B628AAC66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FD4E59B-5933-47A2-A57A-097B628AAC66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FD4E59B-5933-47A2-A57A-097B628AAC66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FD4E59B-5933-47A2-A57A-097B628AAC66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

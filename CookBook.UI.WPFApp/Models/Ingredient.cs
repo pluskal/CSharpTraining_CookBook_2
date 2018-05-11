@@ -1,10 +1,9 @@
 ﻿using System;
-using CookBook.DAL.Entities.Base;
 using CookBook.Shared.Interfaces;
 
-namespace CookBook.BL.Facades.DTOs
+namespace CookBook.UI.WPFApp.Models
 {
-    public class IngredientListDTO : IId
+    public class Ingredient : IId
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

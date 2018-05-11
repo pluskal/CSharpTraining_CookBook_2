@@ -21,7 +21,7 @@ namespace CookBook.BL.Facades.Tests
             var cookBookDbContext = new CookBookDbContext();
             _unitOfWork = new UnitOfWork(cookBookDbContext);
             var ingredientRepository = new IngredientRepository(_unitOfWork);
-            var mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<IngredientMappingProfile>()));
+            var mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<IngredientDTOMappingProfile>()));
             _facadeSUT = new IngredientFacade(ingredientRepository, mapper);
         }
 
@@ -56,7 +56,7 @@ namespace CookBook.BL.Facades.Tests
         {
             //Arrange
             //Act
-            var ingredient = _facadeSUT.GetDetail(Guid.Empty);
+            var ingredient = _facadeSUT.GetDetail(Guid.Parse("70923986-c08b-4798-9658-fd2c98ca8da5"));
 
             //Assert
             Assert.NotNull(ingredient);
@@ -66,7 +66,7 @@ namespace CookBook.BL.Facades.Tests
         public void NewIngredientDTO_Save_IngredientSaved()
         {
             //Arrange
-            var ingredient = new IngredientDetailDTO {Name = "Milk", Description = "3.5%"};
+            var ingredient = new IngredientDTO {Name = "Milk", Description = "3.5%", Id = Guid.Empty, };
 
             //Act
             ingredient = _facadeSUT.Save(ingredient);
@@ -80,18 +80,32 @@ namespace CookBook.BL.Facades.Tests
         {
             //Arrange
             var random = new Random(DateTime.Now.Millisecond).Next();
-            var ingredient = new IngredientDetailDTO
+            var description = $"{random} description";
+            var ingredient = new IngredientDTO
             {
                 Id = Guid.Parse("60923986-c08b-4798-9658-fd2c98ca8da4"),
                 Name = "Milk",
-                Description = $"{random}"
+                Description = description
             };
 
             //Act
             ingredient = _facadeSUT.Save(ingredient);
 
             //Assert
-            Assert.Equal(random.ToString(), ingredient.Description);
+            Assert.Equal(description, ingredient.Description);
+        }
+
+        [Fact]
+        public void _Delete_IngredientDeleted()
+        {
+            ////Arrange
+            
+
+            ////Act
+            //ingredient = _facadeSUT.Delete();
+
+            ////Assert
+            //Assert.Equal(random.ToString(), ingredient.Description);
         }
     }
 }

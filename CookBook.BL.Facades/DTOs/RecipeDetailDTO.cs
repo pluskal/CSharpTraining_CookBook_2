@@ -13,6 +13,6 @@ namespace CookBook.BL.Facades.DTOs
         public TimeSpan Duration { get; set; }
         public FoodType FoodType { get; set; }
         public string Description { get; set; }
-        public ICollection<IngredientDetailDTO> Ingredients { get; set; } = new List<IngredientDetailDTO>();
+        public ICollection<IngredientAmountDTO> Ingredients { get; set; } = new List<IngredientAmountDTO>();
     }
 }

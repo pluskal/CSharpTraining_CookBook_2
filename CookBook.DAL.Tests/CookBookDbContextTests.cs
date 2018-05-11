@@ -20,13 +20,14 @@ namespace CookBook.DAL.Tests
 
         private static IngredientEntity CreateSugarIngredient()
         {
-            return new IngredientEntity {Name = "Sugar", Description = "Sweet"};
+            return new IngredientEntity {Name = "Sugar", Description = "Sweet", Id = Guid.NewGuid() };
         }
 
         private static RecipeEntity CreateEmptyRecipe()
         {
             return new RecipeEntity
             {
+                Id = Guid.Parse("75923986-c08b-4798-9658-fd2c98ca8db5"),
                 Name = nameof(RecipeEntity.Name),
                 Description = nameof(RecipeEntity.Description),
                 Duration = TimeSpan.FromMinutes(323),
@@ -38,6 +39,7 @@ namespace CookBook.DAL.Tests
         =>
              new RecipeEntity
             {
+                Id = Guid.Parse("35923986-c08b-4798-9658-fd2c98ca8db5"),
                 Name = "Lemonade",
                 Description = "Sweet summer drink",
                 Duration = TimeSpan.FromMinutes(2),
@@ -50,6 +52,7 @@ namespace CookBook.DAL.Tests
                         Unit = Unit.L,
                         Ingredient = new IngredientEntity
                         {
+                            Id = Guid.Parse("25923986-c08b-4798-9658-fd2c98ca8db5"),
                             Name = "Water",
                             Description = "Sprinkling"
                         }
@@ -60,6 +63,7 @@ namespace CookBook.DAL.Tests
                         Unit = Unit.L,
                         Ingredient = new IngredientEntity
                         {
+                            Id = Guid.Parse("15923986-c08b-4798-9658-fd2c98ca8db5"),
                             Name = "Lemon",
                             Description = "Sweet lemon"
                         }

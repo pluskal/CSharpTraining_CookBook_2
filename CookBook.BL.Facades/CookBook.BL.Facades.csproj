@@ -44,14 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mappings\IngredientMappingProfile.cs" />
+    <Compile Include="Mappings\IngredientDTOMappingProfile.cs" />
     <Compile Include="CrudFacade.cs" />
-    <Compile Include="DTOs\IngredientDetailDTO.cs" />
+    <Compile Include="DTOs\IngredientAmountDTO.cs" />
     <Compile Include="DTOs\RecipeDetailDTO.cs" />
     <Compile Include="DTOs\RecipeListDTO.cs" />
     <Compile Include="IngredientFacade.cs" />
-    <Compile Include="DTOs\IngredientListDTO.cs" />
-    <Compile Include="Mappings\RecipeMappingProfile.cs" />
+    <Compile Include="DTOs\IngredientDTO.cs" />
+    <Compile Include="Mappings\RecipeDTOMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecipeFacade.cs" />
   </ItemGroup>

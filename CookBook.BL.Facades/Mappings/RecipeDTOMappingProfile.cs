@@ -4,9 +4,9 @@ using CookBook.DAL.Entities;
 
 namespace CookBook.BL.Facades.Mappings
 {
-    public class RecipeMappingProfile : Profile
+    public class RecipeDTOMappingProfile : Profile
     {
-        public RecipeMappingProfile()
+        public RecipeDTOMappingProfile()
         {
             this.CreateMap<RecipeEntity, RecipeListDTO>();
             this.CreateMap<RecipeEntity, RecipeDetailDTO>();

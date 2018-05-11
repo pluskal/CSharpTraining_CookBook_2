@@ -1,4 +1,7 @@
-﻿using CookBook.BL.Repository.Base;
+﻿using System;
+using System.Data.Entity;
+using System.Linq;
+using CookBook.BL.Repository.Base;
 using CookBook.DAL.Entities;
 
 namespace CookBook.BL.Repository
