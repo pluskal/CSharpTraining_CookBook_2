@@ -22,19 +22,21 @@
                 <ComboBox ItemsSource="{Binding MergedAvailableCultures,
                                                 Source={x:Static lex:LocalizeDictionary.Instance}}"
                           SelectedItem="{Binding Culture,
-                                                Source={x:Static lex:LocalizeDictionary.Instance}}"
+                                                 Source={x:Static lex:LocalizeDictionary.Instance}}"
                           DisplayMemberPath="NativeName"/>
             </ToolBar>
         </ToolBarTray>
         <StatusBar DockPanel.Dock="Bottom">
             <TextBlock>
                 <Run Text="{lex:Loc MainWindow.StatusBar.LanguageLabel}" />
-                <Run Text="{Binding Culture.DisplayName, Mode=OneWay, Source={x:Static lex:LocalizeDictionary.Instance}}" />
+                <Run Text="{Binding Culture.DisplayName, 
+                                    Mode=OneWay, 
+                                    Source={x:Static lex:LocalizeDictionary.Instance}}" />
             </TextBlock>
         </StatusBar>
         <Grid>
         <TabControl>
-            <TabItem Header="Recipes">
+                <TabItem Header="{lex:Loc MainWindow.Tab.RecipesLabel}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -44,7 +46,7 @@
                     <views:RecipeDetailView Grid.Column="1"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Ingredients">
+                <TabItem Header="{lex:Loc MainWindow.Tab.IngredientsLabel}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />

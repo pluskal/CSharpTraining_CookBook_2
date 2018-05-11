@@ -117,7 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="MainWindow.StatusBar.LanguageLabel" xml:space="preserve">
+    <value>Jazyk</value>
+  </data>
+  <data name="MainWindow.Tab.IngredientsLabel" xml:space="preserve">
+    <value>Suroviny</value>
+  </data>
+  <data name="MainWindow.Tab.RecipesLabel" xml:space="preserve">
+    <value>Recepty</value>
+  </data>
   <data name="MainWindow.Title" xml:space="preserve">
     <value>Kuchařka</value>
+  </data>
+  <data name="RecipeListView.GridView.DurationLabel" xml:space="preserve">
+    <value>Délka přípravy</value>
+  </data>
+  <data name="RecipeListView.GridView.FoodTypeLabel" xml:space="preserve">
+    <value>Typ jídla</value>
+  </data>
+  <data name="RecipeListView.GridView.RecipeNameLabel" xml:space="preserve">
+    <value>Jméno receptu</value>
   </data>
 </root>

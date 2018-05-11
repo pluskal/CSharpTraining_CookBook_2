@@ -61,11 +61,65 @@ namespace CookBook.UI.WPFApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        internal static string MainWindow_StatusBar_LanguageLabel {
+            get {
+                return ResourceManager.GetString("MainWindow.StatusBar.LanguageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ingredients.
+        /// </summary>
+        internal static string MainWindow_Tab_IngredientsLabel {
+            get {
+                return ResourceManager.GetString("MainWindow.Tab.IngredientsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recipes.
+        /// </summary>
+        internal static string MainWindow_Tab_RecipesLabel {
+            get {
+                return ResourceManager.GetString("MainWindow.Tab.RecipesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CookBook.
         /// </summary>
         internal static string MainWindow_Title {
             get {
                 return ResourceManager.GetString("MainWindow.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration.
+        /// </summary>
+        internal static string RecipeListView_GridView_DurationLabel {
+            get {
+                return ResourceManager.GetString("RecipeListView.GridView.DurationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Food type.
+        /// </summary>
+        internal static string RecipeListView_GridView_FoodTypeLabel {
+            get {
+                return ResourceManager.GetString("RecipeListView.GridView.FoodTypeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recipe name.
+        /// </summary>
+        internal static string RecipeListView_GridView_RecipeNameLabel {
+            get {
+                return ResourceManager.GetString("RecipeListView.GridView.RecipeNameLabel", resourceCulture);
             }
         }
     }
