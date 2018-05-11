@@ -14,6 +14,38 @@ namespace CookBook.UI.WPFApp
         private readonly Dictionary<string, object> _propertyBackingFields
             = new Dictionary<string, object>();
 
+        protected void SetValue<T>(Expression<Func<T>> propertySelector, T value)
+        {
+            var propertyName = GetPropertyName(propertySelector);
+            SetValue<T>(propertyName, value);
+        }
+
+        private void SetValue<T>(string propertyName, T value)
+        {
+            if (string.IsNullOrEmpty(propertyName))
+                throw new ArgumentException("Empty property name");
+
+            this._propertyBackingFields[propertyName] = value;
+            this.OnPropertyChanged(propertyName);
+        }
+
+        protected object GetValue(string propertyName)
+        {
+            if (string.IsNullOrEmpty(propertyName))
+                throw new ArgumentException("Empty property name");
+            if (this._propertyBackingFields.TryGetValue(propertyName, out var value)) return value;
+
+            var propertyDescriptor = TypeDescriptor.GetProperties(this.GetType())
+                                                   .Find(propertyName,false);
+            if(propertyDescriptor == null)
+                throw new ArgumentException("Invalid property name");
+
+            value = propertyDescriptor.GetValue(this);
+            this._propertyBackingFields.Add(propertyName,value);
+
+            return value;
+        }
+
         protected T GetValue<T>(Expression<Func<T>> propertySelector)
         {
             var propertyName = GetPropertyName(propertySelector);
