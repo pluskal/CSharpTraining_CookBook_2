@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Windows.Input;
 using CookBook.Shared.Enums;
 using CookBook.Shared.Interfaces;
+using CookBook.UI.WPFApp.Validation;
 
 namespace CookBook.UI.WPFApp.Models
 {
@@ -21,6 +22,8 @@ namespace CookBook.UI.WPFApp.Models
         }
 
         [Required(ErrorMessage = "Name is required")]
+        [MaxLength(50, ErrorMessage = "Name exceeded 50 letters")]
+        [ExcludeChar("/.,!@#$%", ErrorMessage = "Name contains invalid letters")]
         public string Name
         {
             get => this.GetValue(() => this.Name);

@@ -106,7 +106,7 @@
     <Compile Include="Models\RecipeDetail.cs" />
     <Compile Include="Models\RecipeList.cs" />
     <Compile Include="Models\ValidableModelBase.cs" />
-    <Compile Include="Validation\RequiredRule.cs" />
+    <Compile Include="Validation\ExcludeChar.cs" />
     <Compile Include="Views\IngredientAmountList.xaml.cs">
       <DependentUpon>IngredientAmountList.xaml</DependentUpon>
     </Compile>
