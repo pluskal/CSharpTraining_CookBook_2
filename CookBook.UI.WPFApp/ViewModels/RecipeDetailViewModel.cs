@@ -32,12 +32,17 @@ namespace CookBook.UI.WPFApp.ViewModels
             RemoveIngredientCommand = new RelayCommand<IngredientAmount>(OnRemoveIngredient);
 
             NewRecipeCommand = new RelayCommand(OnNewRecipe);
-            SaveRecipeCommand = new RelayCommand<RecipeDetail>(OnSaveRecipe);
+            SaveRecipeCommand = new RelayCommand<RecipeDetail>(OnSaveRecipe,SaveRecipeCanExecute);
             DeleteRecipeCommand = new RelayCommand<RecipeDetail>(OnDeleteRecipe);
 
             this._messenger.Register<IngredientsChanged>(this,OnIngredientsChanged);
 
             InitializeNewRecipe();
+        }
+
+        private bool SaveRecipeCanExecute(RecipeDetail recipeDetail)
+        {
+            return !recipeDetail?.HasErrors ?? false;
         }
 
         private void OnDeleteRecipe(RecipeDetail recipeDetail)
@@ -97,12 +102,10 @@ namespace CookBook.UI.WPFApp.ViewModels
 
         public RecipeDetail RecipeDetail
         {
-            get => _recipeDetail;
+            get => this.GetValue(() => this.RecipeDetail);
             set
             {
-                if (Equals(value, _recipeDetail)) return;
-                _recipeDetail = value;
-                OnPropertyChanged();
+                this.SetValue(() => this.RecipeDetail,value);
                 NotifyRecipeChanged();
             }
         }
