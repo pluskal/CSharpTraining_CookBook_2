@@ -6,8 +6,7 @@
              xmlns:viewModels="clr-namespace:CookBook.UI.WPFApp.ViewModels"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance viewModels:IngredientListViewModel, IsDesignTimeCreatable=False}"
-             DataContext="{Binding IngredientListViewModel, Source={StaticResource ViewModelLocator}}">
+             d:DataContext="{d:DesignInstance viewModels:IngredientListViewModel, IsDesignTimeCreatable=False}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" />

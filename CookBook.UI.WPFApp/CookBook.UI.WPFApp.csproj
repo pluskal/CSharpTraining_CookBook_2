@@ -40,6 +40,9 @@
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Windsor.4.1.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -67,7 +70,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -101,6 +106,7 @@
     <Compile Include="Adapters\Mappings\RecipeMappingProfile.cs" />
     <Compile Include="Adapters\RecipeFacade.cs" />
     <Compile Include="BindableBase.cs" />
+    <Compile Include="WPFAppWindsorInstaller.cs" />
     <Compile Include="Models\IngredientAmount.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\RecipeDetail.cs" />
@@ -116,9 +122,8 @@
     <Compile Include="Messages\IngredientsChanged.cs" />
     <Compile Include="Messages\SelectedIngredientMessage.cs" />
     <Compile Include="ViewModels\RecipeDetailViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RecipeListViewModel.cs" />
-    <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Messages\SelectedRecipeMessage.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\IngredientDetailView.xaml.cs">

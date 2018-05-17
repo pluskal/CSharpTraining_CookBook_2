@@ -11,7 +11,6 @@
              lex:ResxLocalizationProvider.DefaultDictionary="Resources"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:RecipeListViewModel, IsDesignTimeCreatable=False}"
-             DataContext="{Binding RecipeListViewModel, Source={StaticResource ViewModelLocator}}"
              >
     <i:Interaction.Triggers>
     <i:EventTrigger EventName="Loaded">
