@@ -9,7 +9,6 @@
              d:DesignWidth="300"
              d:DesignHeight="400"
              d:DataContext="{d:DesignInstance viewModels:IngredientDetailViewModel, IsDesignTimeCreatable=True}"
-             DataContext="{Binding IngredientDetailViewModel, Source={StaticResource ViewModelLocator}}"
              x:Name="IngredientDetailViewControl">
     <Grid>
         <Grid.RowDefinitions>

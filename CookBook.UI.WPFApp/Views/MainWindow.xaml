@@ -6,6 +6,7 @@
         xmlns:views="clr-namespace:CookBook.UI.WPFApp.Views"
         xmlns:viewModels="clr-namespace:CookBook.UI.WPFApp.ViewModels"
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        xmlns:wpfApp="clr-namespace:CookBook.UI.WPFApp"
         lex:LocalizeDictionary.DesignCulture="en"
         lex:ResxLocalizationProvider.DefaultAssembly="CookBook.UI.WPFApp"
         lex:ResxLocalizationProvider.DefaultDictionary="Resources"
@@ -14,7 +15,6 @@
         Height="450"
         Width="800"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel, IsDesignTimeCreatable=False}"
-        DataContext="{Binding MainViewModel, Source={StaticResource ViewModelLocator}}"
         >
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top">
@@ -42,8 +42,8 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <views:RecipeListView   Grid.Column="0" />
-                    <views:RecipeDetailView Grid.Column="1"/>
+                    <views:RecipeListView   Grid.Column="0" DataContext="{Binding RecipeListViewModel}" />
+                    <views:RecipeDetailView Grid.Column="1" DataContext="{Binding RecipeDetailViewModel}" />
                 </Grid>
             </TabItem>
                 <TabItem Header="{lex:Loc MainWindow.Tab.IngredientsLabel}">
@@ -52,8 +52,8 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <views:IngredientListView   Grid.Column="0" />
-                    <views:IngredientDetailView Grid.Column="1"/>
+                    <views:IngredientListView   Grid.Column="0" DataContext="{Binding IngredientListViewModel}"/>
+                    <views:IngredientDetailView Grid.Column="1" DataContext="{Binding IngredientDetailViewModel}"/>
                 </Grid>
             </TabItem>
         </TabControl>

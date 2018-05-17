@@ -5,9 +5,9 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:viewModels="clr-namespace:CookBook.UI.WPFApp.ViewModels"
              xmlns:views="clr-namespace:CookBook.UI.WPFApp.Views"
-             StartupUri="Views/MainWindow.xaml">
+             Startup="App_OnStartup">
     <Application.Resources>
-        <local:ViewModelLocator x:Key="ViewModelLocator" />
+        <viewModels:MainViewModel x:Key="ViewModelLocator" />
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
