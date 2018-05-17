@@ -35,36 +35,19 @@ namespace CookBook.UI.WPFApp
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
             _container = new WindsorContainer();
+            
+            _container.Install(new WPFAppWindsorInstaller());
 
-            _container.Register(Component.For<DbContext, CookBookDbContext>());
-            _container.Register(Component.For<UnitOfWork>());
-            _container.Register(Component.For<IngredientRepository>());
-            _container.Register(Component.For<RecipeRepository>());
-
-            var configurationProvider = new MapperConfiguration(cfg =>
+            this.MainWindow = new MainWindow
             {
-                cfg.AddProfile<IngredientDTOMappingProfile>();
-                cfg.AddProfile<RecipeDTOMappingProfile>();
-                cfg.AddProfile<RecipeMappingProfile>();
-                cfg.AddProfile<IngredientMappingProfile>();
-            });
-            _container.Register(Component.For<IMapper, Mapper>().Instance(new Mapper(configurationProvider)));
-            _container.Register(Component.For<IngredientFacade>());
-            _container.Register(Component.For<RecipeFacade>());
-
-            _container.Register(Component.For<RecipeFacadeAdapter>());
-            _container.Register(Component.For<IngredientFacadeAdapter>());
-
-            _container.Register(Component.For<IMessenger, Messenger>());
-
-            _container.Register(Component.For<MainViewModel>());
-            _container.Register(Component.For<IngredientListViewModel>());
-            _container.Register(Component.For<IngredientDetailViewModel>());
-            _container.Register(Component.For<RecipeListViewModel>());
-            _container.Register(Component.For<RecipeDetailViewModel>());
-
-            this.MainWindow = new MainWindow {DataContext = this._container.Resolve<MainViewModel>()};
+                DataContext = this._container.Resolve<MainViewModel>()
+            };
             this.MainWindow.Show();
+        }
+
+        private void App_OnExit(object sender, ExitEventArgs e)
+        {
+            this._container.Dispose();
         }
     }
 }

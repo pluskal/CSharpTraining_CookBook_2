@@ -106,6 +106,7 @@
     <Compile Include="Adapters\Mappings\RecipeMappingProfile.cs" />
     <Compile Include="Adapters\RecipeFacade.cs" />
     <Compile Include="BindableBase.cs" />
+    <Compile Include="WPFAppWindsorInstaller.cs" />
     <Compile Include="Models\IngredientAmount.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\RecipeDetail.cs" />

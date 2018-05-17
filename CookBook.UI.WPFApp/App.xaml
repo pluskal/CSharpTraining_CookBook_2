@@ -5,7 +5,8 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:viewModels="clr-namespace:CookBook.UI.WPFApp.ViewModels"
              xmlns:views="clr-namespace:CookBook.UI.WPFApp.Views"
-             Startup="App_OnStartup">
+             Startup="App_OnStartup"
+             Exit="App_OnExit">
     <Application.Resources>
         <viewModels:MainViewModel x:Key="ViewModelLocator" />
         <Style TargetType="{x:Type TextBox}">
